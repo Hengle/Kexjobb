@@ -5,7 +5,7 @@ public class Steering : MonoBehaviour {
 
 	public GameObject agent;
 	public float slowingRadius = 10;
-
+	public bool flee = false;
 	private Transform target;
 //	private GameObject target2;
 	private Target targetScript;
@@ -32,8 +32,11 @@ public class Steering : MonoBehaviour {
 
 	void Update ()
 	{
-		Seek();
-		//Flee();
+		if(flee)
+			Flee();
+		else
+			Seek();
+		agentRb.MoveRotation(Quaternion.LookRotation(currentVelocity));
 		//Pursuit();
 	}
 	//Moves towards target
@@ -51,6 +54,7 @@ public class Steering : MonoBehaviour {
 		steeringForce = Truncate(steeringForce, agentScript.maxForce);
 		Vector3 steeringAcc = steeringForce / agentRb.mass;   //Converts force to acceleration
 		currentVelocity = Truncate(steeringAcc + currentVelocity, agentScript.maxSpeed);
+//		agent.transform.right = currentVelocity.normalized;
 		agentRb.position = agentRb.position + currentVelocity;  //Sets the new agent position
 	}
 	//Flees from target
@@ -105,22 +109,22 @@ public class Steering : MonoBehaviour {
 	//		Debug.Log("Collition");
 			//First we need to check if it is possible for a collision to occur
 			Vector3 steering;
-			float targetZ = target.gameObject.transform.position.z;
-			float agentZ = agent.transform.position.z;
-			float horizontalDistance = targetZ - agentZ; //Distance from agent to obstacle on z-axis
+			float targetX = target.gameObject.transform.position.x;
+			float agentX = agent.transform.position.x;
+			float horizontalDistance = targetX - agentX; //Distance from agent to obstacle on z-axis
 /*
 			if (horizontalDistance < 0)		//Then the obstacle is on the right side of the agent, thus we want to steer it in the left direction
 			{
-				float steeringForce = (targetZ - targetSc.radius) - (agentZ + agentCollider.radius); 
+				float steeringForce = (targetX - targetSc.radius) - (agentX + agentCollider.radius); 
 				steering = new Vector3(0f, 0f, steeringForce);
 			}
 			else
 			{
-				float steeringForce = (targetZ + targetSc.radius) - (agentZ - agentCollider.radius);
+				float steeringForce = (targetX + targetSc.radius) - (agentX - agentCollider.radius);
 				steering = new Vector3(0f, 0f, steeringForce);
 			}
 */
-			float steeringForce = (targetZ - targetSc.radius) - (agentZ + agentCollider.radius);
+			float steeringForce = (targetX - targetSc.radius) - (agentX + agentCollider.radius);
 			steering = new Vector3(0f, 0f, steeringForce);
 
 			steering = Truncate(steering, agentScript.maxForce);
@@ -130,8 +134,11 @@ public class Steering : MonoBehaviour {
 			Vector3 desiredVelocity = (currentVelocity + steeringAcc);
 //			desiredVelocity.Normalize();
 			float theta = Vector3.Angle(desiredVelocity, currentVelocity);
-			agentRb.rotation = Quaternion.Euler(0f, theta, 0f);
+			agentRb.MoveRotation(Quaternion.Euler(0f, theta, 0f));
 			//			Debug.Log(theta);
+			currentVelocity = agentRb.transform.forward * agentScript.maxSpeed;
+			agentRb.position = agentRb.position + currentVelocity;  //Sets the new agent position
+
 			Debug.DrawRay(agent.transform.position, steeringAcc);
 			Debug.DrawRay(agent.transform.position, desiredVelocity*20);
 			Debug.DrawRay(agent.transform.position, currentVelocity*20);

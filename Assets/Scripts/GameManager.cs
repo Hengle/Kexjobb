@@ -4,10 +4,11 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
 	public GameObject agent;
-
+	public int spawnTime = 3;
 
 	void Start ()
 	{
+
 		StartCoroutine(spawnAgents());
 
 	}
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour {
 		while (true)
 		{
 			Instantiate(agent);
-			yield return new WaitForSeconds(3);
+			yield return new WaitForSeconds(spawnTime);
 			Destroy(agent);
 		}
 	}

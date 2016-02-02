@@ -7,6 +7,7 @@ public class Target : MonoBehaviour {
 	[HideInInspector] public Vector3 velocity;
 
 	private GameObject target;
+	private Vector3 mousePosition;
 
 	void Start ()
 	{
@@ -14,14 +15,29 @@ public class Target : MonoBehaviour {
 		velocity = new Vector3(Random.Range(-maxVelocity, maxVelocity), 
 			0f , Random.Range(-maxVelocity, maxVelocity));
 		target = GameObject.FindGameObjectWithTag("Target");
+		mousePosition = new Vector3();
 	}
 	
 	void Update ()
 	{
-		target.transform.position += velocity;	
+		//		target.transform.position += velocity;	
+		SetTargetPosition();
+	}
+	//Sets the target position to the current mouse position
+	void SetTargetPosition()
+	{
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit floorHit;
+		int floorMask = LayerMask.GetMask("FloorMask");
+		if(Physics.Raycast(ray, out floorHit, 100, floorMask))
+		{
+			mousePosition = floorHit.point;
+			target.transform.position = mousePosition;
+		}
 	}
 	void OnTriggerEnter (Collider other)
 	{
-		Destroy(other.gameObject);
+		if(other.GetType() == typeof(SphereCollider) && other.gameObject.tag.Equals("Agent"))
+			Destroy(other.gameObject);
 	}
 }
