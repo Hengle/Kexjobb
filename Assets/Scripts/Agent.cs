@@ -12,15 +12,18 @@ public class Agent : MonoBehaviour {
 	{
 		anim = GetComponent<Animator>();
 	}
-	void Animating()
-	{
-		anim.SetBool("IsWalking", true);
-	}
+
 	void Start ()
-	{	
+	{
+        //Animating();	
 	}
-	
-	void Update ()
+
+    void Animating()
+    {
+        anim.SetBool("IsWalking", true);
+    }
+
+    void Update ()
 	{
 	}
 
