@@ -20,7 +20,6 @@ public class Target : MonoBehaviour {
 	
 	void Update ()
 	{
-		//		target.transform.position += velocity;	
 		SetTargetPosition();
 	}
 	//Sets the target position to the current mouse position
@@ -35,6 +34,7 @@ public class Target : MonoBehaviour {
 			target.transform.position = mousePosition;
 		}
 	}
+	//Destroys the agent if it reaches the target
 	void OnTriggerEnter (Collider other)
 	{
 		if(other.GetType() == typeof(SphereCollider) && other.gameObject.tag.Equals("Agent"))
