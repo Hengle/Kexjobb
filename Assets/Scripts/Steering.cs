@@ -7,7 +7,6 @@ public class Steering : MonoBehaviour {
 	public float slowingRadius = 10;
 	public bool flee = false;
 	private Transform target;
-//	private GameObject target2;
 	private Target targetScript;
 
 	private Agent agentScript;
@@ -21,7 +20,6 @@ public class Steering : MonoBehaviour {
 		agentScript = agent.GetComponent<Agent>();
 		agentCollider = agent.GetComponent<SphereCollider>();
 		target = GameObject.FindGameObjectWithTag("Target").transform;
-//		target2 = GameObject.FindGameObjectWithTag("Target");
 		targetScript = target.GetComponent<Target>();
 	}
 	void Start ()
@@ -37,46 +35,80 @@ public class Steering : MonoBehaviour {
 		else
 			Seek();
 		agentRb.MoveRotation(Quaternion.LookRotation(currentVelocity));
-		//Pursuit();
 	}
-	//Moves towards target
-	void Seek ()
+
+    Vector3 Truncate(Vector3 vec, float max)
+    {
+        float i = max / vec.magnitude;
+        i = i < 1f ? i : 1f;      //If i is less than 1 then velocity is greater than maxVelocity
+        Vector3 truncVec = i * vec;
+        return truncVec;
+    }
+
+    //Moves towards target
+    void Seek ()
 	{
-		Vector3 distanceVector = target.position - agent.transform.position;  //Distance left to target
-		Vector3 dirToTarget = distanceVector.normalized;              //Direction to target as a vector
-		Vector3 desiredVelocity = dirToTarget * agentScript.maxSpeed;   //The desired velocity pointing towards the target
+        //Vector that points to target
+        Vector3 distanceVector = target.position - agent.transform.position;
+
+        //Direction to target
+        Vector3 dirToTarget = distanceVector.normalized;
+
+        //The desired velocity pointing towards the target
+        Vector3 desiredVelocity = dirToTarget * agentScript.maxSpeed;   
+
+        //Slow down if inside slowingRadius
 		float distance = distanceVector.magnitude;
 		if (distance < slowingRadius)
 		{
 			desiredVelocity *= (distance / slowingRadius);
 		}
-		Vector3 steeringForce = desiredVelocity - currentVelocity;    //The steering force is the vector which we want to change the current direction with				
+
+        //The steering force is the vector which we want to change the current direction with
+        Vector3 steeringForce = desiredVelocity - currentVelocity;    				
 		steeringForce = Truncate(steeringForce, agentScript.maxForce);
-		Vector3 steeringAcc = steeringForce / agentRb.mass;   //Converts force to acceleration
+        
+        //Converts force to acceleration
+        Vector3 steeringAcc = steeringForce / agentRb.mass;  
 		currentVelocity = Truncate(steeringAcc + currentVelocity, agentScript.maxSpeed);
-//		agent.transform.right = currentVelocity.normalized;
-		agentRb.position = agentRb.position + currentVelocity;  //Sets the new agent position
+        
+        //Sets the new agent position
+        agentRb.position = agentRb.position + currentVelocity; 
 	}
+
 	//Flees from target
 	void Flee ()
 	{
-		Vector3 distanceVector = agent.transform.position - target.position;  //Distance left to target
-		Vector3 dirToTarget = distanceVector.normalized;              //Direction to target as a vector
-		Vector3 desiredVelocity = dirToTarget * agentScript.maxSpeed;   //The desired velocity pointing towards the target
-		float distance = distanceVector.magnitude;
-		if (distance < slowingRadius)
-		{
-			desiredVelocity *= (distance / slowingRadius);
-		}
-		Vector3 steeringForce = desiredVelocity - currentVelocity;    //The steering force is the vector which we want to change the current direction with				
+        //Vector that points to target
+        Vector3 distanceVector = agent.transform.position - target.position;
+
+        //Direction to target as a vector
+        Vector3 dirToTarget = distanceVector.normalized;
+
+        //The desired velocity pointing towards the target
+        Vector3 desiredVelocity = dirToTarget * agentScript.maxSpeed;
+
+        //The steering force is the vector which we want to change the current direction with	
+        Vector3 steeringForce = desiredVelocity - currentVelocity;    			
 		steeringForce = Truncate(steeringForce, agentScript.maxForce);
-		Vector3 steeringAcc = steeringForce / agentRb.mass;   //Converts force to acceleration
+
+        //Converts force to acceleration
+        Vector3 steeringAcc = steeringForce / agentRb.mass;   
 		currentVelocity = Truncate(steeringAcc + currentVelocity, agentScript.maxSpeed);
-		agentRb.position = agentRb.position + currentVelocity;  //Sets the new agent position
+
+        //Sets the new agent position
+        agentRb.position = agentRb.position + currentVelocity;  
 
 	}
-	//Moves towards the target by predicting its future position (OBS Funkar inte!)
-	void Pursuit()
+
+
+    /// <summary>
+    /// Things down below don't work properly yet
+    /// </summary>
+    /// <param name="target"></param>
+
+    //Moves towards the target by predicting its future position (OBS Funkar inte!)
+    void Pursuit()
 	{
 		Vector3 distanceVector = target.position - agent.transform.position;  //Distance left to target
 		float distance = distanceVector.magnitude;
@@ -173,11 +205,5 @@ public class Steering : MonoBehaviour {
 		}
 	*/
 	//Function for limiting the maximum absolute value of a vector
-	Vector3 Truncate(Vector3 vec, float max)
-	{
-		float i = max / vec.magnitude;
-		i = i < 1f ? i : 1f;      //If i is less than 1 then velocity is greater than maxVelocity
-		Vector3 truncVec = i * vec;
-		return truncVec;
-	}
+
 }
