@@ -73,14 +73,16 @@ public class Steering : MonoBehaviour {
 		currentVelocity = Truncate(steeringAcc + currentVelocity, agentScript.maxSpeed);
         
         //Sets the new agent position
-        agentRb.position = agentRb.position + currentVelocity; 
+        agentRb.position = agentRb.position + new Vector3(currentVelocity.x, 0, currentVelocity.z); 
 	}
 
 	//Flees from target
 	void Flee ()
 	{
-        //Vector that points to target
-        Vector3 distanceVector = agent.transform.position - target.position;
+        //Vector that points to agent
+        //Vector3 distanceVector = agent.transform.position - target.position;
+
+        Vector3 distanceVector = -(target.position - agent.transform.position);
 
         //Direction to target as a vector
         Vector3 dirToTarget = distanceVector.normalized;
@@ -96,8 +98,8 @@ public class Steering : MonoBehaviour {
         Vector3 steeringAcc = steeringForce / agentRb.mass;   
 		currentVelocity = Truncate(steeringAcc + currentVelocity, agentScript.maxSpeed);
 
-        //Sets the new agent position
-        agentRb.position = agentRb.position + currentVelocity;  
+        //Sets the new agent position. Avoids movement in Y
+        agentRb.position = agentRb.position + new Vector3(currentVelocity.x, 0, currentVelocity.z);  
 
 	}
 

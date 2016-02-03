@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
 		{
 			Instantiate(agent);
 			yield return new WaitForSeconds(spawnTime);
-			Destroy(agent);
+			//Destroy(agent);
 		}
 	}
 }

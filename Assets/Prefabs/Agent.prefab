@@ -2067,7 +2067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 115208}
-  slowingRadius: 10
+  slowingRadius: 20
   flee: 0
 --- !u!114 &11464694
 MonoBehaviour:

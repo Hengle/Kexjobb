@@ -668,6 +668,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 11454058, guid: 3d067e2167a75bf439e80a8883d3ccdc, type: 2}
+      propertyPath: slowingRadius
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3d067e2167a75bf439e80a8883d3ccdc, type: 2}
   m_IsPrefabParent: 0
