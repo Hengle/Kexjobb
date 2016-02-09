@@ -10,12 +10,11 @@ GameObject:
   - 4: {fileID: 444444}
   - 54: {fileID: 5475840}
   - 95: {fileID: 9551918}
-  - 114: {fileID: 11483890}
-  - 114: {fileID: 11486042}
-  - 114: {fileID: 11481724}
-  - 114: {fileID: 11478640}
-  - 114: {fileID: 11489638}
   - 114: {fileID: 11420706}
+  - 114: {fileID: 11468098}
+  - 114: {fileID: 11496252}
+  - 114: {fileID: 11466798}
+  - 114: {fileID: 11477614}
   m_Layer: 0
   m_Name: AgentUnitySteer
   m_TagString: Untagged
@@ -1576,7 +1575,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0.07}
+  m_LocalPosition: {x: 0.9, y: 0.5, z: -4.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 419464}
@@ -2150,7 +2149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pathRoot: {fileID: 0}
   _followAsSpline: 0
---- !u!114 &11478640
+--- !u!114 &11466798
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2158,34 +2157,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 101010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d909adc49654547af9ca6eae2e069b98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weight: 1
-  _estimationTime: 2
---- !u!114 &11481724
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 101010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89d19a4bdf5eb4434bad298539068977, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weight: 1
-  _predictionTime: 1.5
-  _minSpeedToConsider: 0.25
---- !u!114 &11483890
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 101010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdaa54b947d9546e3bc45d706993c55c, type: 3}
+  m_Script: {fileID: 11500000, guid: 04cd121205e61924897aacb1f4909257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _drawGizmos: 0
@@ -2195,7 +2167,7 @@ MonoBehaviour:
   _movementPriority: 0
   _turnTime: 0.25
   _mass: 1
-  _allowedMovementAxes: {x: 1, y: 0, z: 1}
+  _allowedMovementAxes: {x: 1, y: 1, z: 1}
   _arrivalRadius: 0.25
   _maxSpeed: 10
   _maxForce: 10
@@ -2206,23 +2178,7 @@ MonoBehaviour:
   _traceAdjustments: 0
   _accelerationRate: 5
   _decelerationRate: 8
---- !u!114 &11486042
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 101010}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 362d742c28ae8421f8ee919cd2b17aba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weight: 1
-  _acceptableDistance: 0
-  _slowDownOnApproach: 0
-  _quarry: {fileID: 0}
-  _maxPredictionTime: 5
---- !u!114 &11489638
+--- !u!114 &11468098
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2230,19 +2186,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 101010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ee13663c71464ae7bf78c54e586e020, type: 3}
+  m_Script: {fileID: 11500000, guid: 8af8b9edcc73df6459f86a033610e2ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weight: 1
+  _estimationTime: 2
+--- !u!114 &11477614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca281cf6c4396024083e7f9bf0c1f989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _queueName: Radar
   _maxQueueProcessedPerUpdate: 20
   _tickLength: 0.5
-  _detectionRadius: 5
+  _detectionRadius: 3
   _detectDisabledVehicles: 0
   _layersChecked:
     serializedVersion: 2
     m_Bits: 4294967295
-  _drawGizmos: 0
+  _drawGizmos: 1
   _preAllocateSize: 30
+--- !u!114 &11496252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 101010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a5f0cc17e376e6418f5821cc8d73dcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weight: 1
+  _predictionTime: 1.5
+  _minSpeedToConsider: 0.25
 --- !u!124 &12442526
 Behaviour:
   m_ObjectHideFlags: 1
