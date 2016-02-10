@@ -27,7 +27,6 @@ public class PathFollowingController : MonoBehaviour
 	{
 		// Get a list of points to follow;
 		var pathPoints = PathFromRoot(_pathRoot);
-		Debug.Log(pathPoints[0]);
 		_steering.Path = _followAsSpline ? new SplinePathway(pathPoints, 1) : new Vector3Pathway(pathPoints, 1);
 	}
 
