@@ -154,11 +154,19 @@ Prefab:
       objectReference: {fileID: 522444132}
     - target: {fileID: 11487330, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
       propertyPath: _radius
-      value: 2.59
+      value: 2.41
       objectReference: {fileID: 0}
     - target: {fileID: 11492216, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
       propertyPath: _safetyDistance
-      value: 3.66
+      value: 2.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492216, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
+      propertyPath: _drawGizmos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492216, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
+      propertyPath: _weight
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
@@ -212,11 +220,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11487330, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
       propertyPath: _radius
-      value: 1.45
+      value: 2.49
       objectReference: {fileID: 0}
     - target: {fileID: 11492216, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
       propertyPath: _safetyDistance
-      value: 3.15
+      value: 2.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492216, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
+      propertyPath: _drawGizmos
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492216, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
+      propertyPath: _weight
+      value: 5000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
