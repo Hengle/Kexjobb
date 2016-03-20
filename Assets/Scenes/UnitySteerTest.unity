@@ -801,7 +801,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11444574, guid: 5c2c2756420ec2a478024099fb85167d, type: 2}
       propertyPath: _detectionRadius
-      value: 3
+      value: 5.03
       objectReference: {fileID: 0}
     - target: {fileID: 11444574, guid: 5c2c2756420ec2a478024099fb85167d, type: 2}
       propertyPath: _drawGizmos
@@ -822,6 +822,10 @@ Prefab:
     - target: {fileID: 11492492, guid: 5c2c2756420ec2a478024099fb85167d, type: 2}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11492492, guid: 5c2c2756420ec2a478024099fb85167d, type: 2}
+      propertyPath: _estimationTime
+      value: 0.53
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5c2c2756420ec2a478024099fb85167d, type: 2}
