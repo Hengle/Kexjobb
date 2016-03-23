@@ -7,7 +7,7 @@ public class AssignTargetScript2 : MonoBehaviour {
 	void Start () {
 		foreach(Transform child in transform)
 		{
-			child.GetComponent<SteerToFollow>()._target = targetPoint;
+			child.GetComponent<SteerToFollow>().Target = targetPoint;
 		}
 	}
 	

@@ -303,6 +303,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1014589453}
   - 114: {fileID: 1014589452}
+  - 114: {fileID: 1014589454}
   m_Layer: 0
   m_Name: FormationGroup
   m_TagString: Untagged
@@ -318,7 +319,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1014589451}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9f7f32c513a8c144866e8e5f7765e06, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ba84c163bf55584f9c48df92f79f596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   nrOfAgents: 3
@@ -338,6 +339,19 @@ Transform:
   - {fileID: 266461026}
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1014589454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1014589451}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf401d0ddf2669641944749861ed6404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nrOfAgents: 3
+  leader: {fileID: 1030808596}
 --- !u!1001 &1030808595
 Prefab:
   m_ObjectHideFlags: 0
@@ -387,6 +401,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 105176, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
+      propertyPath: m_Name
+      value: Leader
+      objectReference: {fileID: 0}
+    - target: {fileID: 11453556, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
+      propertyPath: _considerVelocity
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
