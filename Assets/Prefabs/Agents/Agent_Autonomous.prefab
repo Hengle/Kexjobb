@@ -9,10 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 498074}
   - 114: {fileID: 11482888}
-  - 114: {fileID: 11476526}
-  - 114: {fileID: 11402786}
   - 114: {fileID: 11487330}
-  - 114: {fileID: 11492216}
+  - 114: {fileID: 11453556}
   m_Layer: 0
   m_Name: Agent_Autonomous
   m_TagString: Untagged
@@ -56,9 +54,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105176}
-  m_LocalRotation: {x: 0, y: -0.7071092, z: 0, w: -0.7071043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 404680}
   m_Father: {fileID: 0}
@@ -113,20 +111,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11402786
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 105176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d909adc49654547af9ca6eae2e069b98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weight: 1
-  _estimationTime: 2
---- !u!114 &11476526
+--- !u!114 &11453556
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -138,9 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weight: 1
-  _targetPoint: {x: 25, y: 0, z: 0}
+  _targetPoint: {x: 0, y: 0, z: 0}
   _considerVelocity: 0
-  _defaultToCurrentPosition: 0
+  _defaultToCurrentPosition: 1
 --- !u!114 &11482888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -155,12 +140,12 @@ MonoBehaviour:
   _queueName: Radar
   _maxQueueProcessedPerUpdate: 20
   _tickLength: 0.5
-  _detectionRadius: 0.76
+  _detectionRadius: 11.2
   _detectDisabledVehicles: 1
   _layersChecked:
     serializedVersion: 2
-    m_Bits: 512
-  _drawGizmos: 1
+    m_Bits: 4294967295
+  _drawGizmos: 0
   _preAllocateSize: 30
 --- !u!114 &11487330
 MonoBehaviour:
@@ -173,9 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdaa54b947d9546e3bc45d706993c55c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _drawGizmos: 1
+  _drawGizmos: 0
   _center: {x: 0, y: 0, z: 0}
-  _radius: 1.5
+  _radius: 2.49
   _minSpeedForTurning: 0.1
   _movementPriority: 0
   _turnTime: 0.25
@@ -191,28 +176,69 @@ MonoBehaviour:
   _traceAdjustments: 0
   _accelerationRate: 5
   _decelerationRate: 8
---- !u!114 &11492216
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 105176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76ac98d8852f2468f84827eb78064f63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weight: 1
-  _menace: {fileID: 0}
-  _predictionTime: 0
-  _safetyDistance: 2
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: _target
+      value: 
+      objectReference: {fileID: 432714, guid: 7125c1f6a0e38394daad5c869f638b9f, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _menace
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _weight
+      value: 4.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Height
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Radius
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _drawNeighbors
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _comfortDistance
+      value: 2.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _detectionRadius
+      value: 11.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _drawGizmos
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 105176}
