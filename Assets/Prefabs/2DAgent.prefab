@@ -11,9 +11,9 @@ GameObject:
   - 212: {fileID: 21223248}
   - 114: {fileID: 11445534}
   - 114: {fileID: 11445962}
-  - 114: {fileID: 11446630}
-  - 114: {fileID: 11463948}
-  - 114: {fileID: 11420540}
+  - 114: {fileID: 11406784}
+  - 114: {fileID: 11454942}
+  - 114: {fileID: 11476466}
   m_Layer: 0
   m_Name: 2DAgent
   m_TagString: Untagged
@@ -28,26 +28,25 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
+  m_LocalScale: {x: 4, y: 4, z: 1.01}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11420540
+--- !u!114 &11406784
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 164432}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d07a24efc2074ecc896d836f89bf80f, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e146d7ea4bf7476a83623a39f775965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _weight: 1
-  _maxLatitudeSide: 50
-  _maxLatitudeUp: 50
-  _smoothRate: 0.05
+  _predictionTime: 1.5
+  _minSpeedToConsider: 0.25
 --- !u!114 &11445534
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,14 +91,14 @@ MonoBehaviour:
   _queueName: Radar2D
   _maxQueueProcessedPerUpdate: 20
   _tickLength: 0.5
-  _detectionRadius: 8.7
+  _detectionRadius: 5
   _detectDisabledVehicles: 0
   _layersChecked:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   _drawGizmos: 0
   _preAllocateSize: 30
---- !u!114 &11446630
+--- !u!114 &11454942
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -107,12 +106,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 164432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c7788dd8cc0a4d48b1fbbbe52819e62, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d07a24efc2074ecc896d836f89bf80f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _weight: 1
-  _estimationTime: 0.48
---- !u!114 &11463948
+  _maxLatitudeSide: 100
+  _maxLatitudeUp: 100
+  _smoothRate: 0.05
+--- !u!114 &11476466
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -120,14 +121,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 164432}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 354e549002c5a49a79e1dc8d5cf74df2, type: 3}
+  m_Script: {fileID: 11500000, guid: 40c6ff6dbde0b48c0a919d390bc9edaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weight: 2.16
-  _minRadius: 9.03
-  _maxRadius: 18.9
-  _drawNeighbors: 1
-  _angleCos: 0.7
+  _weight: 1
+  _maximumDistance: 30
+  _tetherPosition: {x: 0, y: 0}
 --- !u!212 &21223248
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -154,8 +153,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: efa30744ce2a9b14681d036b2765b65e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Color: {r: 0.11764705, g: 0.11764705, b: 0.11764705, a: 1}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!1001 &100100000
@@ -168,26 +167,6 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: _maxSpeed
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _maxLatitudeSide
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _maxLatitudeUp
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _weight
-      value: 2.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _minRadius
-      value: 9.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: _maxRadius
-      value: 18.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
