@@ -152,6 +152,7 @@ namespace RVO
 			}
 			//
 			instance_ = this;
+			Clear();
 			DontDestroyOnLoad(gameObject);
 		}
 

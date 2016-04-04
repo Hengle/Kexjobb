@@ -60,7 +60,7 @@
  * circle.
  */
 
-#define RVO_OUTPUT_TIME_AND_POSITIONS
+#undef RVO_OUTPUT_TIME_AND_POSITIONS
 
 using System;
 using System.Collections.Generic;
@@ -77,19 +77,18 @@ namespace RVO
 		{
 			goals = new List<Vector2>();
 			setupScenario();
-			/* Perform (and manipulate) the simulation. */
+			setPreferredVelocities();
+	//		Simulator.Instance.doStep();
 		}
 
 		void Update()
 		{
-			//Debug.Log();
+			/* Perform (and manipulate) the simulation. */
 			if (true)
 			{
 #if RVO_OUTPUT_TIME_AND_POSITIONS
 				updateVisualization();
 #endif
-				setPreferredVelocities();
-				Simulator.Instance.doStep();
 			}
 		}
 		void setupScenario()
@@ -164,24 +163,28 @@ namespace RVO
 
 			return true;
 		}
+		/*
+				public static void Main(string[] args)
+				{
+					Circle circle = new Circle();
 
-		public static void Main(string[] args)
-		{
-			Circle circle = new Circle();
+					/* Set up the scenario. */
 
-			/* Set up the scenario. */
-			circle.setupScenario();
+		//		circle.setupScenario();
 
-			/* Perform (and manipulate) the simulation. */
-			do
-			{
-#if RVO_OUTPUT_TIME_AND_POSITIONS
-				circle.updateVisualization();
-#endif
-				circle.setPreferredVelocities();
-				Simulator.Instance.doStep();
+		/* Perform (and manipulate) the simulation. */
+		/*			
+					do
+					{
+		#if RVO_OUTPUT_TIME_AND_POSITIONS
+						circle.updateVisualization();
+		#endif
+						circle.setPreferredVelocities();
+						Simulator.Instance.doStep();
+					}
+					while (!circle.reachedGoal());
+				}
 			}
-			while (!circle.reachedGoal());
-		}
+		*/
 	}
 }
