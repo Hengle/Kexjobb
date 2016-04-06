@@ -78,18 +78,19 @@ namespace RVO
 			goals = new List<Vector2>();
 			setupScenario();
 			setPreferredVelocities();
-	//		Simulator.Instance.doStep();
 		}
 
 		void Update()
 		{
 			/* Perform (and manipulate) the simulation. */
-			if (true)
+			if (!reachedGoal())
 			{
+				Simulator.Instance.doStep();
+
+			}
 #if RVO_OUTPUT_TIME_AND_POSITIONS
 				updateVisualization();
 #endif
-			}
 		}
 		void setupScenario()
 		{
@@ -100,7 +101,7 @@ namespace RVO
 			 * Specify the default parameters for agents that are subsequently
 			 * added.
 			 */
-			Simulator.Instance.setAgentDefaults(15.0f, 10, 10.0f, 10.0f, 1.5f, 2.0f, new Vector2(0.0f, 0.0f));
+			Simulator.Instance.setAgentDefaults(15.0f, 10, 10.0f, 10.0f, 1.5f, 0.1f, new Vector2(0.0f, 0.0f));
 
 			/*
 			 * Add agents, specifying their start position, and store their
@@ -113,6 +114,7 @@ namespace RVO
 								(float)Math.Sin(i * 2.0f * Math.PI / 250.0f)));
 				goals.Add(-Simulator.Instance.getAgentPosition(i));
 			}
+
 		}
 
 #if RVO_OUTPUT_TIME_AND_POSITIONS

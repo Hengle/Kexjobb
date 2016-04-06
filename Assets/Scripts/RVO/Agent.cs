@@ -62,29 +62,29 @@ namespace RVO
 	/**
 	 * <summary>Defines an agent in the simulation.</summary>
 	 */
-	internal class Agent : MonoBehaviour
+	public class Agent : MonoBehaviour
 	{
-		internal IList<KeyValuePair<float, Agent>> agentNeighbors_ = new List<KeyValuePair<float, Agent>>();
-		internal IList<KeyValuePair<float, Obstacle>> obstacleNeighbors_ = new List<KeyValuePair<float, Obstacle>>();
-		internal IList<Line> orcaLines_ = new List<Line>();
-		internal Vector2 position_;
-		internal Vector2 prefVelocity_;
-		internal Vector2 velocity_;
-		internal int id_ = 0;
-		internal int maxNeighbors_ = 0;
-		internal float maxSpeed_ = 0.0f;
-		internal float neighborDist_ = 0.0f;
+		public IList<KeyValuePair<float, Agent>> agentNeighbors_ = new List<KeyValuePair<float, Agent>>();
+		public IList<KeyValuePair<float, Obstacle>> obstacleNeighbors_ = new List<KeyValuePair<float, Obstacle>>();
+		public IList<Line> orcaLines_ = new List<Line>();
+		public Vector2 position_;
+		public Vector2 prefVelocity_;
+		public Vector2 velocity_;
+		public int id_ = 0;
+		public int maxNeighbors_ = 0;
+		public float maxSpeed_ = 0.0f;
+		public float neighborDist_ = 0.0f;
 		[SerializeField]
-		internal float radius_ = 0.0f;
-		internal float timeHorizon_ = 0.0f;
-		internal float timeHorizonObst_ = 0.0f;
+		public float radius_ = 0.0f;
+		public float timeHorizon_ = 0.0f;
+		public float timeHorizonObst_ = 0.0f;
 
 		private Vector2 newVelocity_;
 
 		/**
 		 * <summary>Computes the neighbors of this agent.</summary>
 		 */
-		internal void computeNeighbors()
+		public void computeNeighbors()
 		{
 			obstacleNeighbors_.Clear();
 			float rangeSq = RVOMath.sqr(timeHorizonObst_ * maxSpeed_ + radius_);
@@ -102,7 +102,7 @@ namespace RVO
 		/**
 		 * <summary>Computes the new velocity of this agent.</summary>
 		 */
-		internal void computeNewVelocity()
+		public void computeNewVelocity()
 		{
 			orcaLines_.Clear();
 
@@ -452,7 +452,7 @@ namespace RVO
 		 * <param name="agent">A pointer to the agent to be inserted.</param>
 		 * <param name="rangeSq">The squared range around this agent.</param>
 		 */
-		internal void insertAgentNeighbor(Agent agent, ref float rangeSq)
+		public void insertAgentNeighbor(Agent agent, ref float rangeSq)
 		{
 			if (this != agent)
 			{
@@ -491,7 +491,7 @@ namespace RVO
 		 * inserted.</param>
 		 * <param name="rangeSq">The squared range around this agent.</param>
 		 */
-		internal void insertObstacleNeighbor(Obstacle obstacle, float rangeSq)
+		public void insertObstacleNeighbor(Obstacle obstacle, float rangeSq)
 		{
 			Obstacle nextObstacle = obstacle.next_;
 
@@ -516,7 +516,7 @@ namespace RVO
 		 * <summary>Updates the two-dimensional position and two-dimensional
 		 * velocity of this agent.</summary>
 		 */
-		internal void update()
+		public void update()
 		{
 			velocity_ = newVelocity_;
 //			position_ += velocity_ * Simulator.Instance.timeStep_;

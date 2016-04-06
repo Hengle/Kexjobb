@@ -336,6 +336,7 @@ namespace RVO
 		 */
 		public float doStep()
 		{
+/*
 			if (workers_ == null)
 			{
 				workers_ = new Worker[numWorkers_];
@@ -347,25 +348,38 @@ namespace RVO
 					workers_[block] = new Worker(block * getNumAgents() / workers_.Length, (block + 1) * getNumAgents() / workers_.Length, doneEvents_[block]);
 				}
 			}
-
+*/
+//			var worker = new Worker()
 			kdTree_.buildAgentTree();
-
-			for (int block = 0; block < workers_.Length; ++block)
+			for (int agentNo = 0; agentNo < agents_.Count; ++agentNo)
 			{
-				doneEvents_[block].Reset();
-				ThreadPool.QueueUserWorkItem(workers_[block].step);
+				Simulator.Instance.agents_[agentNo].GetComponent<Agent>().computeNeighbors();
+				Simulator.Instance.agents_[agentNo].GetComponent<Agent>().computeNewVelocity();
+			}
+			for (int agentNo = 0; agentNo < agents_.Count; ++agentNo)
+			{
+				Simulator.Instance.agents_[agentNo].GetComponent<Agent>().update();
 			}
 
-			WaitHandle.WaitAll(doneEvents_);
+			/*
+						for (int block = 0; block < workers_.Length; ++block)
+						{
+			//				doneEvents_[block].Reset();
+						workers_[block].step(new object());
+							//				ThreadPool.QueueUserWorkItem(workers_[block].step);
+						}
 
-			for (int block = 0; block < workers_.Length; ++block)
-			{
-				doneEvents_[block].Reset();
-				ThreadPool.QueueUserWorkItem(workers_[block].update);
-			}
+			//			WaitHandle.WaitAll(doneEvents_);
 
-			WaitHandle.WaitAll(doneEvents_);
+						for (int block = 0; block < workers_.Length; ++block)
+						{
+							doneEvents_[block].Reset();
+							ThreadPool.QueueUserWorkItem(workers_[block].update);
+						}
 
+						WaitHandle.WaitAll(doneEvents_);
+
+					*/
 			globalTime_ += timeStep_;
 
 			return globalTime_;
@@ -506,7 +520,9 @@ namespace RVO
 		 */
 		public Vector2 getAgentPosition(int agentNo)
 		{
-			return agents_[agentNo].GetComponent<Agent>().position_;
+			Vector3 agentPos = agents_[agentNo].transform.position;
+			Vector2 agent2DPos = new Vector2(agentPos.x, agentPos.z);
+			return agent2DPos;
 		}
 
 		/**
