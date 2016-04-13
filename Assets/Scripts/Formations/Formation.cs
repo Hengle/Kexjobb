@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnitySteer.Behaviors;
+using System.Collections;
+using System;
 
 public abstract class Formation : MonoBehaviour {
 	public int nrOfAgents;
@@ -8,6 +9,9 @@ public abstract class Formation : MonoBehaviour {
 
 	protected float arrivalRadius = 5;
   protected	float speedScaling = 0.5f;
+	//Set in subclass
+	protected float maxWidth;
+	protected float maxHeight;			
 	protected Vector3[] templatePositions;
 //	GameObject[] otherAgents; 
 	
@@ -15,8 +19,13 @@ public abstract class Formation : MonoBehaviour {
 	void Start () {
 		templatePositions = new Vector3[nrOfAgents];
 		CreateTemplate();
+
+		float radius = leader.GetComponent<AutonomousVehicle>().Radius;
+		float height = 2 * radius + Math.Abs(templatePositions[templatePositions.Length - 1].z);
+		float width = 2 * radius + Math.Abs(templatePositions[templatePositions.Length - 1].x);
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		Vector3 leadersTarget = leader.GetComponent<SteerForPoint>().TargetPoint;

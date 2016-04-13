@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Agent : MonoBehaviour {
+public class Agent : MonoBehaviour
+{
 
 	public float maxSpeed = 5;
 	public float maxForce = 10;
@@ -16,11 +17,11 @@ public class Agent : MonoBehaviour {
 	{
 		anim.SetBool("IsWalking", true);
 	}
-	void Start ()
-	{	
+	void Start()
+	{
 	}
-	
-	void Update ()
+
+	void Update()
 	{
 	}
 

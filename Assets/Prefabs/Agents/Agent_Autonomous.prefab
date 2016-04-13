@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 5.49}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 404680}
@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weight: 1
-  _targetPoint: {x: 0, y: 0, z: 0}
+  _targetPoint: {x: 0, y: 0, z: 20}
   _considerVelocity: 0
   _defaultToCurrentPosition: 1
 --- !u!114 &11482888
@@ -158,9 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdaa54b947d9546e3bc45d706993c55c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _drawGizmos: 0
+  _drawGizmos: 1
   _center: {x: 0, y: 0, z: 0}
-  _radius: 2.49
+  _radius: 2.5
   _minSpeedForTurning: 0.1
   _movementPriority: 0
   _turnTime: 0.25
