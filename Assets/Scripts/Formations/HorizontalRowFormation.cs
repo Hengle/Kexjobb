@@ -1,12 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class HorizontalRowFormation : Formation {
-
+public class HorizontalRowFormation : Formation
+{
+	private float distanceBetweenAgents = 10f;
 	protected override void CreateTemplate()
 	{
-		templatePositions[0] = new Vector3(0f, 0f, 0f);
-		templatePositions[1] = new Vector3(10f, 0f, 0f);
-		templatePositions[2] = new Vector3(-10f, 0f, 0f);
+		float xPos = 0;
+		for (int i = 0; i < templatePositions.Length; i++)
+		{
+			if (i % 2 != 0)
+			{
+				xPos += distanceBetweenAgents;
+			}
+			templatePositions[i] = new Vector3(xPos, 0f, 0f);
+			xPos *= -1;
+		}
 	}
 }
