@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weight: 1
-  _targetPoint: {x: 0, y: 0, z: 50}
+  _targetPoint: {x: 0, y: 0, z: 100}
   _considerVelocity: 0
   _defaultToCurrentPosition: 1
 --- !u!114 &11451054

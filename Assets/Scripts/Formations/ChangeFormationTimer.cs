@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-public class ChangeFormation : MonoBehaviour {
+public class ChangeFormationTimer : MonoBehaviour {
 
 	public float timer = 5;
 
