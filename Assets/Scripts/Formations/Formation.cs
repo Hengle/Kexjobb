@@ -37,7 +37,6 @@ public abstract class Formation : MonoBehaviour
 		{
 			Transform agentTransform = transform.GetChild(i).transform;
 			Vector3 target = leader.transform.position + templatePositions[i];
-			Debug.Log(target.ToString());
 			Transform neighbor = transform.GetChild(i - 1).transform;
 			SteerForPoint pointScript = transform.GetChild(i).GetComponent<SteerForPoint>();
 			AutonomousVehicle vehicleScript = transform.GetChild(i).GetComponent<AutonomousVehicle>();

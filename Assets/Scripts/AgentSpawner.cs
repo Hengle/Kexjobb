@@ -10,7 +10,7 @@ public class AgentSpawner : MonoBehaviour {
 //	private Formation formation;
 	private Vector3 [] startPositions;
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		CalculateStartPositions();
 		//Initiate leader
 //		formation = GetComponent<Formation>();
