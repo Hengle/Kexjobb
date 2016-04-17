@@ -8,9 +8,9 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 405574}
-  - 114: {fileID: 11415754}
-  - 114: {fileID: 11451054}
-  - 114: {fileID: 11444916}
+  - 114: {fileID: 11400944}
+  - 54: {fileID: 5496858}
+  - 135: {fileID: 13573582}
   m_Layer: 0
   m_Name: Leader
   m_TagString: Untagged
@@ -94,6 +94,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140636}
   m_Mesh: {fileID: 4300000, guid: 2b7868588ac22ea499fa682e601f3340, type: 3}
+--- !u!54 &5496858
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128068}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
 --- !u!95 &9513566
 Animator:
   serializedVersion: 3
@@ -111,7 +126,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11415754
+--- !u!114 &11400944
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -119,63 +134,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 128068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ee13663c71464ae7bf78c54e586e020, type: 3}
+  m_Script: {fileID: 11500000, guid: 5887bcdf887d4b94ca5062af2aedf653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _queueName: Radar
-  _maxQueueProcessedPerUpdate: 20
-  _tickLength: 0.5
-  _detectionRadius: 11.2
-  _detectDisabledVehicles: 1
-  _layersChecked:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  _drawGizmos: 0
-  _preAllocateSize: 30
---- !u!114 &11444916
-MonoBehaviour:
+  maxSpeed: 5
+  maxForce: 10
+  rotSpeed: 10
+  radius: 2.5
+  force: 2
+  arrivalRadius: 2
+  targetPos: {x: 0, y: 0, z: 50}
+--- !u!135 &13573582
+SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 128068}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2fadd96e71d04da1849fa0f42d60409, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weight: 1
-  _targetPoint: {x: 0, y: 0, z: 100}
-  _considerVelocity: 0
-  _defaultToCurrentPosition: 1
---- !u!114 &11451054
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 128068}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdaa54b947d9546e3bc45d706993c55c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _drawGizmos: 1
-  _center: {x: 0, y: 0, z: 0}
-  _radius: 2.5
-  _minSpeedForTurning: 0.1
-  _movementPriority: 0
-  _turnTime: 0.25
-  _mass: 1
-  _allowedMovementAxes: {x: 1, y: 0, z: 1}
-  _arrivalRadius: 0.25
-  _maxSpeed: 2
-  _maxForce: 10
-  _canMove: 1
-  _queueName: Steering
-  _tickLength: 0.1
-  _maxQueueProcessedPerUpdate: 20
-  _traceAdjustments: 0
-  _accelerationRate: 5
-  _decelerationRate: 8
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

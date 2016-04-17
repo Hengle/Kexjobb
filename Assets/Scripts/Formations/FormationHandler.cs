@@ -8,9 +8,9 @@ public class FormationHandler : MonoBehaviour {
 	{
 		HorizontalRow, Triangle, VerticalRow
 	}
-	public Formation[] formations;
 	public FormationState currentFormation;
 
+	private Formation[] formations;
 	private FormationState oldFormation;
 
 	void Start () {

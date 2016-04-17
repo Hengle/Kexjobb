@@ -286,8 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d39ec771a4a4444ae193ebab12c892, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  formations: []
-  currentFormation: 0
+  currentFormation: 1
 --- !u!1 &1457893747
 GameObject:
   m_ObjectHideFlags: 0
