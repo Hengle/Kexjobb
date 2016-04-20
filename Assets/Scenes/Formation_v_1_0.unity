@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cda6ffc78441f843b2f0d1c1c4db9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nrOfAgents: 100
+  nrOfAgents: 10
   leader: {fileID: 128068, guid: 049361b12da9f2d418375d55d7de343b, type: 2}
   agent: {fileID: 105176, guid: 9e604020d9580cf44be3afa6041f5695, type: 2}
 --- !u!114 &1014589459

@@ -38,15 +38,19 @@ public class AgentSpawner : MonoBehaviour {
 	void CalculateStartPositions()
 	{
 		startPositions = new Vector3[nrOfAgents];
-		float xPos = 0;
+		BoxCollider collider = GetComponent<BoxCollider>();
+		//float midPointX = transform.position.x;
+		//float midPointZ = transform.position.z;
+		Bounds bounds = collider.bounds;
+		Vector3 min = bounds.min;
+		Vector3 max = bounds.max;
+/*
+		Vector2 xBoundaries = new Vector2();
+		Vector2 yBoundaries = new Vector2();
+*/		
 		for (int i = 0; i < nrOfAgents; i++)
 		{
-			if (i % 2 != 0)
-			{
-				xPos += 10f;
-			}
-			startPositions[i] = new Vector3(xPos, 0f, 0f);
-			xPos *= -1;
+			startPositions[i] = new Vector3(Random.Range(min.x, max.x), 0.0f, Random.Range(min.z, max.z));
 		}
 	}
 }
