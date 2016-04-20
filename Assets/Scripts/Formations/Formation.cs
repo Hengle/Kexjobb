@@ -34,31 +34,13 @@ public abstract class Formation : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-//		Vector3 leadersTarget = leader.GetComponent<SteerForPoint>().TargetPoint;
-		Vector3 leadersTarget = leader.GetComponent<Agent>().TargetPoint;
 		for (int i = 1; i < templatePositions.Length; i++)
 		{
 			Transform agentTransform = transform.GetChild(i).transform;
 			Vector3 target = leader.transform.position + templatePositions[i];
-//			Transform neighbor = transform.GetChild(i - 1).transform;
-			//			SteerForPoint pointScript = transform.GetChild(i).GetComponent<SteerForPoint>();
-			//			AutonomousVehicle vehicleScript = transform.GetChild(i).GetComponent<AutonomousVehicle>();
 			Agent agentScript = transform.GetChild(i).GetComponent<Agent>();
 			agentScript.TargetPoint = target;
 			agentScript.enabled = true;
-
-			//float distanceToTarget = (target - agentTransform.position).magnitude;
-			//agentScript.maxSpeed = distanceToTarget * speedScaling + leader.GetComponent<Agent>().maxSpeed;
-			/*
-			if (agentScript.IsArriving)
-			{
-				float speed = agentScript.rotSpeed; //agentScript.rotSpeed;
-				Vector3 targetDir = leader.transform.forward;
-				float step = speed * Time.deltaTime;
-				Vector3 newDir = Vector3.RotateTowards(agentTransform.forward, targetDir, step, 0.0f);
-				agentTransform.rotation = Quaternion.LookRotation(newDir);
-			}
-			*/
 		}
 	}
 	public Vector3[] TemplatePositions
