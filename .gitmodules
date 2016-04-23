@@ -1,6 +1,9 @@
 [submodule "Assets/UnitySteer"]
 	path = Assets/UnitySteer
 	url = https://github.com/ricardojmendez/UnitySteer.git
-[submodule "Assets/RVO2"]
-	path = Assets/RVO2
+
+[submodule "Assets/RVO2-CS"]
+	
+	path = Assets/RVO2-CS
+	
 	url = https://github.com/snape/RVO2-CS.git
