@@ -38,7 +38,8 @@ public class AgentSpawner : MonoBehaviour {
 	void CalculateStartPositions()
 	{
 		startPositions = new Vector3[nrOfAgents];
-		BoxCollider collider = GetComponent<BoxCollider>();
+		BoxCollider collider = GetComponentInChildren<BoxCollider>();
+		
 		//float midPointX = transform.position.x;
 		//float midPointZ = transform.position.z;
 		Bounds bounds = collider.bounds;

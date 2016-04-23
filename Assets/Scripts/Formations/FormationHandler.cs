@@ -10,7 +10,7 @@ public class FormationHandler : MonoBehaviour {
 	}
 	public FormationState currentFormation;
 
-	private Formation[] formations;
+//	private Formation[] formations;
 	private FormationState oldFormation;
 
 	void Start () {
@@ -54,5 +54,13 @@ public class FormationHandler : MonoBehaviour {
 			}
 		}
 	}
-
+	void ChangeFormation(FormationState formation)
+	{
+		//TODO: Implement this shit!
+	}
+	//Changes formation to a random new one
+	void ChangeFormationRandom()
+	{
+		//TODO: Create this!
+	}
 }

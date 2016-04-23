@@ -23,7 +23,7 @@ public abstract class Formation : MonoBehaviour
 		templatePositions = new Vector3[transform.childCount];
 		targetPositions = new Vector3[transform.childCount];
 		CreateTemplate();
-		leader = transform.GetChild(0).gameObject;
+		leader = transform.GetChild(1).gameObject;
 
 		float radius = leader.GetComponent<Agent>().radius;
 		float height = 2 * radius + Math.Abs(templatePositions[templatePositions.Length - 1].z);
@@ -34,7 +34,7 @@ public abstract class Formation : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		for (int i = 1; i < templatePositions.Length; i++)
+		for (int i = 2; i < templatePositions.Length; i++)
 		{
 			Transform agentTransform = transform.GetChild(i).transform;
 			Vector3 target = leader.transform.position + templatePositions[i];

@@ -3,13 +3,13 @@ using System.Collections;
 
 public class Agent : MonoBehaviour
 {
-	public float maxSpeed = 1;
+	public float maxSpeed = 5;
 	public float maxForce = 10;
 	public float rotSpeed = 1;
 	public float radius = 2.5f;
 	public float force = .5f;
-	public float arrivalRadius = 10;
-	public float deltaSpeed = 0.01f;
+	public float arrivalRadius = .1f;
+	public float deltaSpeed = 1;
 	public Vector3 targetPos;
 
 	private Material m;
