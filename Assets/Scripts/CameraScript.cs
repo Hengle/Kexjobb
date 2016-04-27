@@ -3,12 +3,12 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour
 {
-	private RVOController controller;
+	private RVOControllerCircle controller;
 //	private float minSize;
 	private float padding;
 	void Awake()
 	{
-		controller = GetComponent<RVOController>();
+		controller = GetComponent<RVOControllerCircle>();
 		
 	}
 	// Use this for initialization
