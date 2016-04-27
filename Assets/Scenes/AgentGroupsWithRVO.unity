@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61e8d284b7af1ce46b83df25143c8f1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
+  agent: {fileID: 164624, guid: c793f4ffa55225b478f71c0fbd49f53b, type: 2}
   nrOfAgents: 0
 --- !u!4 &1450014744
 Transform:
