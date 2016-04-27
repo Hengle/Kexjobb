@@ -61,12 +61,17 @@ public class RVOControllerCircle : MonoBehaviour
 		{
 			RVO.Vector2 pos = sim.getAgentPosition(i);
 			RVO.Vector2 velocity = sim.getAgentVelocity(i);
-			Vector3 lookDir = new Vector3(velocity.x(), 0f, velocity.y());
+            Vector3 temp = new Vector3(velocity.x(), 0f, velocity.y());
 
+            Vector3 lookDir = agents[i].transform.forward;
+            if (temp != new Vector3(0f,0f,0f))
+                lookDir = temp;
+            
 			agents[i].transform.position = new Vector3(pos.x(), 0f, pos.y());
-			agents[i].transform.rotation = Quaternion.LookRotation(lookDir);
+            agents[i].transform.rotation = Quaternion.LookRotation(lookDir);
 
-			CheckDistance(agents[i].transform.position);
+
+            CheckDistance(agents[i].transform.position);
 		}
 	}
 	void CheckDistance(Vector3 pos)
