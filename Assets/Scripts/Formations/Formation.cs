@@ -8,6 +8,8 @@ public abstract class Formation : MonoBehaviour
 //	public int nrOfAgents;
 	private GameObject leader;
 	private Vector3[] targetPositions;
+	private RVO.Vector2[] targetPositionsRVO;
+	private Transform[] agentTransforms;
 
 	protected float arrivalRadius = 5;
 	protected float speedScaling = 0.5f;
@@ -22,8 +24,10 @@ public abstract class Formation : MonoBehaviour
 	{
 		templatePositions = new Vector3[transform.childCount];
 		targetPositions = new Vector3[transform.childCount];
+		targetPositionsRVO = new RVO.Vector2[transform.childCount];
+		agentTransforms = new Transform[transform.childCount];
 		CreateTemplate();
-		leader = transform.GetChild(1).gameObject;
+		leader = transform.GetChild(0).gameObject;
 
 		float radius = leader.GetComponent<Agent>().radius;
 		float height = 2 * radius + Math.Abs(templatePositions[templatePositions.Length - 1].z);
@@ -34,13 +38,15 @@ public abstract class Formation : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		for (int i = 2; i < templatePositions.Length; i++)
+		for (int i = 1; i < templatePositions.Length; i++)
 		{
 			Transform agentTransform = transform.GetChild(i).transform;
 			Vector3 target = leader.transform.position + templatePositions[i];
-			Agent agentScript = transform.GetChild(i).GetComponent<Agent>();
-			agentScript.TargetPoint = target;
-			agentScript.enabled = true;
+			RVO.Vector2 targetRVO = new RVO.Vector2(target.x, target.z);
+			targetPositionsRVO[i] = targetRVO;
+			//			Agent agentScript = transform.GetChild(i).GetComponent<Agent>();
+			//agentScript.TargetPoint = target;
+			//agentScript.enabled = true;
 		}
 	}
 	public Vector3[] TemplatePositions
@@ -50,6 +56,10 @@ public abstract class Formation : MonoBehaviour
 	public Vector3[] TargetPostions
 	{
 		get { return targetPositions; }
+	}
+	public RVO.Vector2[] TagetPositionsRVO
+	{
+		get { return targetPositionsRVO; }
 	}
 	protected abstract void CreateTemplate();
 }

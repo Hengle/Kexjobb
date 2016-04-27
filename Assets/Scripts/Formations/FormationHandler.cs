@@ -4,10 +4,6 @@ using System.Collections;
 //Class for making it easier to change between formations
 
 public class FormationHandler : MonoBehaviour {
-	public enum FormationState
-	{
-		HorizontalRow, Triangle, VerticalRow
-	}
 	public FormationState currentFormation;
 
 //	private Formation[] formations;
