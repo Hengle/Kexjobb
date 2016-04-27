@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Tjoflojt : MonoBehaviour {
+public class RVOVirtualAgentGroups : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

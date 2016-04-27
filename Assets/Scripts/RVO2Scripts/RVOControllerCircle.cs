@@ -4,9 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using RVO;
 
-public class RVOController : MonoBehaviour
+public class RVOControllerCircle : MonoBehaviour
 {
-
 	IList<RVO.Vector2> goals;
 
 	public GameObject agent;
