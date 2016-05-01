@@ -5,9 +5,10 @@ public class Spawner : MonoBehaviour {
 
 	public int nrOfAgents;
 	public GameObject agent;
-	public GameObject[] agents;
+	[HideInInspector] public GameObject[] agents;
+	public Vector3 leadersTarget;
 
-	private FormationState spawnFormation;
+//	private FormationState spawnFormation;
 	private float distanceBetweenAgents = 10f;
 	private Vector3[] startPositions;
 
@@ -17,6 +18,7 @@ public class Spawner : MonoBehaviour {
 		startPositions = new Vector3[nrOfAgents];
 		CreateStartPositions();
 		InstantiateAgents();
+		GetComponent<Formation>().leadersTarget = leadersTarget;	//Set the target for the leader
 	}
 
 	// Generate starting positions for each agent

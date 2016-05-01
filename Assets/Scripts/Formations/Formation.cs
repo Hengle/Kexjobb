@@ -5,6 +5,7 @@ using System;
 
 public abstract class Formation : MonoBehaviour
 {
+	[HideInInspector] public Vector3 leadersTarget;
 //	public int nrOfAgents;
 	private GameObject leader;
 	private Vector3[] targetPositions;
@@ -28,6 +29,9 @@ public abstract class Formation : MonoBehaviour
 		agentTransforms = new Transform[transform.childCount];
 		CreateTemplate();
 		leader = transform.GetChild(0).gameObject;
+		//Target positions for leader, needs only to be set once
+		targetPositions[0] = leadersTarget;
+		targetPositionsRVO[0] = new RVO.Vector2(leadersTarget.x, leadersTarget.z);
 
 		float radius = leader.GetComponent<Agent>().radius;
 		float height = 2 * radius + Math.Abs(templatePositions[templatePositions.Length - 1].z);

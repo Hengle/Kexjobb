@@ -6,11 +6,11 @@ using RVO;
 
 public class RVOController : MonoBehaviour
 {
-	private RVO.Vector2[] goals;
 
 	public GameObject agent;
-	[SerializeField] private int nrOfAgents = 0;
 
+	private RVO.Vector2[] goals;
+	private int nrOfAgents = 0;
 	private Simulator sim;
 	private GameObject[] agents;
 	private GameObject[] formationGroups;
@@ -28,7 +28,7 @@ public class RVOController : MonoBehaviour
 			nrOfAgents += formationGroups[i].GetComponent<Spawner>().nrOfAgents;
 
 			formations[i] = formationGroups[i].GetComponent<Formation>();
-		//	Debug.Log(nrOfAgents);
+			//	Debug.Log(nrOfAgents);
 		}
 
 		goals = new RVO.Vector2[nrOfAgents];
@@ -36,8 +36,8 @@ public class RVOController : MonoBehaviour
 		agents = new GameObject[nrOfAgents];
 
 		SetupScenario(); // Add the agents to the simulator
-		//SetPreferredVelocities();
-		//InstantiateAgents();
+										 //SetPreferredVelocities();
+										 //InstantiateAgents();
 	}
 
 	// Update is called once per frame
@@ -59,9 +59,9 @@ public class RVOController : MonoBehaviour
 			RVO.Vector2 pos = sim.getAgentPosition(i);
 			RVO.Vector2 velocity = sim.getAgentPrefVelocity(i);
 			Vector3 lookDir = new Vector3(velocity.x(), 0f, velocity.y());
-			
+
 			agents[i] = Instantiate(agent, new Vector3(pos.x(), 0f, pos.y()),
-				Quaternion.LookRotation(lookDir)) as GameObject;
+					Quaternion.LookRotation(lookDir)) as GameObject;
 		}
 	}
 
@@ -82,16 +82,16 @@ public class RVOController : MonoBehaviour
 			agents[i].transform.rotation = Quaternion.LookRotation(lookDir);
 
 
-		//	CheckDistance(agents[i].transform.position);
+			//	CheckDistance(agents[i].transform.position);
 		}
 	}
 	/*
-	void CheckDistance(Vector3 pos)
-	{
-		float dist = (new Vector3(0f, 0f, 0f) - pos).magnitude;
-		if (dist > distanceToMid) distanceToMid = dist;
-	}
-	*/
+void CheckDistance(Vector3 pos)
+{
+	float dist = (new Vector3(0f, 0f, 0f) - pos).magnitude;
+	if (dist > distanceToMid) distanceToMid = dist;
+}
+*/
 
 	// Add all the agents to the simulator
 	void SetupScenario()
@@ -101,25 +101,25 @@ public class RVOController : MonoBehaviour
 		Simulator.Instance.setTimeStep(0.25f);
 
 		/*
-		 * Specify the default parameters for agents that are subsequently
-		 * added.
-		 */
+ * Specify the default parameters for agents that are subsequently
+ * added.
+ */
 		Simulator.Instance.setAgentDefaults(15.0f, 10, 10.0f, 10.0f, 2.5f, 2.0f, new RVO.Vector2(0.0f, 0.0f));
 
-        /*
-		 * Add agents, specifying their start position, and store their
-		 * goals on the opposite side of the environment.
-		 */
-        int agentCounter = 0;
+		/*
+ * Add agents, specifying their start position, and store their
+ * goals on the opposite side of the environment.
+ */
+		int agentCounter = 0;
 		for (int i = 0; i < formationGroups.Length; ++i)
 		{
 			GameObject currentGroup = formationGroups[i];
 			Vector3[] startPostions = currentGroup.GetComponent<Spawner>().StartPositions;
-			for(int j = 0; j < currentGroup.transform.childCount; j++)
+			for (int j = 0; j < currentGroup.transform.childCount; j++)
 			{
 				RVO.Vector2 pos = new RVO.Vector2(startPostions[j].x, startPostions[j].z);
 				sim.addAgent(pos);
-                agents[agentCounter++] = currentGroup.transform.GetChild(j).gameObject;
+				agents[agentCounter++] = currentGroup.transform.GetChild(j).gameObject;
 			}
 		}
 		for (int i = 0; i < agents.Length; i++)
@@ -130,19 +130,17 @@ public class RVOController : MonoBehaviour
 	void SetPreferredVelocities()
 	{
 		/*
-		 * Set the preferred velocity to be a vector of unit magnitude
-		 * (speed) in the direction of the goal.
-		 */
+ * Set the preferred velocity to be a vector of unit magnitude
+ * (speed) in the direction of the goal.
+ */
 		int currentGroupIndex = 0;
 		for (int i = 0; i < formations.Length; i++)
 		{
-			
 			RVO.Vector2[] targetPositions = formationGroups[i].GetComponent<Formation>().TagetPositionsRVO;
 			for (int j = 0; j < targetPositions.Length; j++)
-				goals[currentGroupIndex + j] = targetPositions[j];
-			currentGroupIndex += targetPositions.Length;
+				goals[currentGroupIndex++] = targetPositions[j];
 		}
-		for (int i = 0; i < Simulator.Instance.getNumAgents(); ++i)
+		for (int i = 0; i < Simulator.Instance.getNumAgents(); i++)
 		{
 			RVO.Vector2 goalVector = goals[i] - Simulator.Instance.getAgentPosition(i);
 
@@ -160,7 +158,7 @@ public class RVOController : MonoBehaviour
 		/* Check if all agents have reached their goals. */
 		for (int i = 0; i < goals.Length; i++)
 		{
-			if (RVOMath.absSq(sim.getAgentPosition(i) - goals[i]) > sim.getAgentRadius(i) * sim.getAgentRadius(i))
+			if (RVOMath.absSq(sim.getAgentPosition(i) - goals[i]) > sim.getAgentRadius(i))
 			{
 				return false;
 			}

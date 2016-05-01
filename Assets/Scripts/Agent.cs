@@ -12,7 +12,7 @@ public class Agent : MonoBehaviour
 	public float deltaSpeed = 1;
 	public Vector3 targetPos;
 
-	private Material m;
+//	private Material m;
 	private Rigidbody rb;
 	private float speed;
 	private bool isArriving;
@@ -27,7 +27,7 @@ public class Agent : MonoBehaviour
 	void Animating()
 	{
 	}
-
+	/*
 	void Update()
 	{
 
@@ -54,7 +54,7 @@ public class Agent : MonoBehaviour
 			}
 		}
 
-		if (distanceToTarget < 0.0001f)
+		if (distanceToTarget < 0.01f)
 		{
 			hasArrived = true;
 			speed = 0;
@@ -63,6 +63,7 @@ public class Agent : MonoBehaviour
 		rb.velocity = speed * transform.forward;
 
 	}
+	*/
 	void OnDrawGizmos()
 	{
 		Gizmos.color = Color.blue;
