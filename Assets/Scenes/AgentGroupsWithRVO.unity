@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 189394171}
   - 114: {fileID: 189394172}
-  - 114: {fileID: 189394173}
+  - 114: {fileID: 189394174}
   m_Layer: 0
   m_Name: Group 1
   m_TagString: Untagged
@@ -125,11 +125,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a336602db5c104eae076440a2f191f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nrOfAgents: 5
+  nrOfAgents: 6
   agent: {fileID: 128068, guid: 049361b12da9f2d418375d55d7de343b, type: 2}
   agents: []
   leadersTarget: {x: 0, y: 0, z: 50}
---- !u!114 &189394173
+--- !u!114 &189394174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 189394170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ba84c163bf55584f9c48df92f79f596, type: 3}
+  m_Script: {fileID: 11500000, guid: bf401d0ddf2669641944749861ed6404, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   leadersTarget: {x: 0, y: 0, z: 0}

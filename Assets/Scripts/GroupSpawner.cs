@@ -8,11 +8,20 @@ public class GroupSpawner : MonoBehaviour {
 	public float width;
 	public float height;
 	public float spawnTime = 3;
+	public GameObject group2;
+	public GameObject group3;
 
 	private List<GameObject> groups;
 	private System.Random random;
+	private RVOController rvo;
+
+	void Awake()
+	{
+		rvo = GetComponent<RVOController>();
+	}
 	// Use this for initialization
 	void Start () {
+		groups = new List<GameObject>();
 		random = new System.Random();
 		InvokeRepeating("Spawn", spawnTime, spawnTime);
 	}
@@ -48,8 +57,33 @@ public class GroupSpawner : MonoBehaviour {
 	}
 	void InstantiateGroup(int nrOfAgents, Vector3 startPosition, FormationState formation)
 	{
-		//Spawn leader at startPosition
+		//Spawn group at startPosition
+		if(nrOfAgents == 2)
+		{
+			groups.Add(Instantiate(group2, startPosition, Quaternion.identity) as GameObject);
+		}
+		else if(nrOfAgents == 3)
+		{
+			groups.Add(Instantiate(group3, startPosition, Quaternion.identity) as GameObject);
+		}
+		switch(formation)
+		{
+			case FormationState.HorizontalRow:
+				groups[groups.Count - 1].AddComponent<HorizontalRowFormation>();
+				break;
+			case FormationState.Triangle:
+				groups[groups.Count - 1].AddComponent<TriangleFormation>();
+				break;
+			case FormationState.VerticalRow:
+				groups[groups.Count - 1].AddComponent<VerticalRowFormation>();
+				break;
+		}
+		groups[groups.Count - 1].GetComponent<Formation>().leadersTarget = startPosition + new Vector3(0f, 0f, 50f);
+		rvo.UpdateController();
+	}
 
-		//Spawn rest of group at their respective positions
+	public List<GameObject> Groups
+	{
+		get { return groups; }
 	}
 }
