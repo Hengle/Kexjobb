@@ -6,6 +6,8 @@ using System;
 public abstract class Formation : MonoBehaviour
 {
 	[HideInInspector] public Vector3 leadersTarget;
+	[HideInInspector]
+	public int nrOfAgents;
 //	public int nrOfAgents;
 	private GameObject leader;
 	private Vector3[] targetPositions;
@@ -23,6 +25,7 @@ public abstract class Formation : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		nrOfAgents = transform.childCount;
 		templatePositions = new Vector3[transform.childCount];
 		targetPositions = new Vector3[transform.childCount];
 		targetPositionsRVO = new RVO.Vector2[transform.childCount];
@@ -61,7 +64,7 @@ public abstract class Formation : MonoBehaviour
 	{
 		get { return targetPositions; }
 	}
-	public RVO.Vector2[] TagetPositionsRVO
+	public RVO.Vector2[] TargetPositionsRVO
 	{
 		get { return targetPositionsRVO; }
 	}

@@ -70,13 +70,13 @@ public class RVOController : MonoBehaviour
 	public void UpdateController()
 	{
 		formationGroups.Add(transform.GetChild(transform.childCount - 1).gameObject);
-		nrOfAgents += formationGroups[transform.childCount - 1].GetComponent<Spawner>().nrOfAgents;
+		nrOfAgents += formationGroups[transform.childCount - 1].GetComponent<Formation>().nrOfAgents;
 		formations.Add(formationGroups[transform.childCount - 1].GetComponent<Formation>());
-		for (int i = goals.Count; i < nrOfAgents; i++)
-		{
-			goals.Add(new RVO.Vector2());
-		}
 		GameObject newGroup = GetComponent<GroupSpawner>().Groups.Last();
+		for (int i = 0; i < newGroup.transform.childCount; i++)		//newGroup.transform.childCount is the number of agents added
+		{
+			goals.Add(formationGroups[transform.childCount - 1].GetComponent<Formation>().TargetPositionsRVO[i]);
+		}
 		for(int i = 0; i < newGroup.transform.childCount; i++)
 		{
 			agents.Add(newGroup.transform.GetChild(i).gameObject);
@@ -135,11 +135,12 @@ void CheckDistance(Vector3 pos)
 		for (int i = 0; i < formationGroups.Capacity; ++i)
 		{
 			GameObject currentGroup = formationGroups[i];
-			Vector3[] startPostions = currentGroup.GetComponent<Spawner>().StartPositions;
-
+//			Vector3[] startPostions = currentGroup.GetComponent<Spawner>().StartPositions;
+			
 			for (int j = 0; j < currentGroup.transform.childCount; j++)
 			{
-				RVO.Vector2 pos = new RVO.Vector2(startPostions[j].x, startPostions[j].z);
+				//				RVO.Vector2 pos = new RVO.Vector2(startPostions[j].x, startPostions[j].z);
+				RVO.Vector2 pos = new RVO.Vector2(currentGroup.transform.position.x, currentGroup.transform.position.z);
 				sim.addAgent(pos);
 //				agents[agentCounter++] = currentGroup.transform.GetChild(j).gameObject;
 				agents.Add(currentGroup.transform.GetChild(j).gameObject);
@@ -159,9 +160,9 @@ void CheckDistance(Vector3 pos)
  * (speed) in the direction of the goal.
  */
 		int currentGroupIndex = 0;
-		for (int i = 0; i < formations.Capacity; i++)
+		for (int i = 0; i < formationGroups.Capacity; i++)
 		{
-			RVO.Vector2[] targetPositions = formationGroups[i].GetComponent<Formation>().TagetPositionsRVO;
+			RVO.Vector2[] targetPositions = formationGroups[i].GetComponent<Formation>().TargetPositionsRVO;
 			for (int j = 0; j < targetPositions.Length; j++)
 				goals[currentGroupIndex++] = targetPositions[j];
 		}

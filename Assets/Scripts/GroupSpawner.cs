@@ -60,13 +60,18 @@ public class GroupSpawner : MonoBehaviour {
 		//Spawn group at startPosition
 		if(nrOfAgents == 2)
 		{
-			groups.Add(Instantiate(group2, startPosition, Quaternion.identity) as GameObject);
+			GameObject group = Instantiate(group2, startPosition, Quaternion.identity) as GameObject;
+			group.transform.parent = transform;
+			groups.Add(group);
+			
 		}
 		else if(nrOfAgents == 3)
 		{
-			groups.Add(Instantiate(group3, startPosition, Quaternion.identity) as GameObject);
+			GameObject group = Instantiate(group3, startPosition, Quaternion.identity) as GameObject;
+			group.transform.parent = transform;
+			groups.Add(group);
 		}
-		switch(formation)
+		switch (formation)
 		{
 			case FormationState.HorizontalRow:
 				groups[groups.Count - 1].AddComponent<HorizontalRowFormation>();
