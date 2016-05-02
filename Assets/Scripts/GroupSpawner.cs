@@ -75,17 +75,17 @@ public class GroupSpawner : MonoBehaviour {
 		switch (formation)
 		{
 			case FormationState.HorizontalRow:
-				groups[groups.Count - 1].AddComponent<HorizontalRowFormation>().enabled = true;
+				groups.Last().AddComponent<HorizontalRowFormation>().enabled = true;
 				break;
 			case FormationState.Triangle:
-				groups[groups.Count - 1].AddComponent<TriangleFormation>().enabled = true;
+				groups.Last().AddComponent<TriangleFormation>().enabled = true;
 				break;
 			case FormationState.VerticalRow:
-				groups[groups.Count - 1].AddComponent<VerticalRowFormation>().enabled = true;
+				groups.Last().AddComponent<VerticalRowFormation>().enabled = true;
 				break;
 		}
 //		groups.Last().GetComponent<Formation>().enabled = true;
-		groups[groups.Count - 1].GetComponent<Formation>().leadersTarget = startPosition + new Vector3(0f, 0f, 50f);
+		groups.Last().GetComponent<Formation>().leadersTarget = startPosition + new Vector3(0f, 0f, 50f);
 		rvo.UpdateController();
 	}
 

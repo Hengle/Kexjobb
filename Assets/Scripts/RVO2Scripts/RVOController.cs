@@ -8,15 +8,15 @@ using RVO;
 public class RVOController : MonoBehaviour
 {
 	public GameObject agent;
-    public float agentRootSpeed;
+	public float agentRootSpeed;
 
 	//private RVO.Vector2[] goals;
 	private List<RVO.Vector2> goals;
 	private int nrOfAgents = 0;
 	private Simulator sim;
-//	private GameObject[] agents;
-//	private GameObject[] formationGroups;
-//	private Formation[] formations;
+	//	private GameObject[] agents;
+	//	private GameObject[] formationGroups;
+	//	private Formation[] formations;
 	private List<GameObject> agents;
 	private List<GameObject> formationGroups;
 	private List<Formation> formations;
@@ -24,10 +24,10 @@ public class RVOController : MonoBehaviour
 
 	void Start()
 	{
-        agentRootSpeed = 2f;
+		agentRootSpeed = 2f;
 		// Find number of agents
-//		formationGroups = new GameObject[transform.childCount];
-//		formations = new Formation[transform.childCount];
+		//		formationGroups = new GameObject[transform.childCount];
+		//		formations = new Formation[transform.childCount];
 		formationGroups = new List<GameObject>(transform.childCount);
 		formations = new List<Formation>(transform.childCount);
 		for (int i = 0; i < formationGroups.Capacity; i++)
@@ -40,14 +40,14 @@ public class RVOController : MonoBehaviour
 			//	Debug.Log(nrOfAgents);
 		}
 
-//		goals = new RVO.Vector2[nrOfAgents];
+		//		goals = new RVO.Vector2[nrOfAgents];
 		goals = new List<RVO.Vector2>(nrOfAgents);
-		for(int i = 0; i < goals.Capacity; i++)
+		for (int i = 0; i < goals.Capacity; i++)
 		{
 			goals.Add(new RVO.Vector2());
 		}
 		sim = Simulator.Instance;
-//		agents = new GameObject[nrOfAgents];
+		//		agents = new GameObject[nrOfAgents];
 		agents = new List<GameObject>(nrOfAgents);
 
 		SetupScenario(); // Add the agents to the simulator
@@ -73,13 +73,13 @@ public class RVOController : MonoBehaviour
 		nrOfAgents += formationGroups[transform.childCount - 1].GetComponent<Formation>().nrOfAgents;
 		formations.Add(formationGroups[transform.childCount - 1].GetComponent<Formation>());
 		GameObject newGroup = GetComponent<GroupSpawner>().Groups.Last();
-		for (int i = 0; i < newGroup.transform.childCount; i++)		//newGroup.transform.childCount is the number of agents added
+		for (int i = 0; i < newGroup.transform.childCount; i++)   //newGroup.transform.childCount is the number of agents added
 		{
 			goals.Add(formations.Last().TargetPositionsRVO[i]);
 		}
-		for(int i = 0; i < newGroup.transform.childCount; i++)
+		for (int i = 0; i < newGroup.transform.childCount; i++)
 		{
-			RVO.Vector2 pos = new RVO.Vector2(newGroup.transform.position.x, newGroup.transform.position.z);
+			RVO.Vector2 pos = new RVO.Vector2(newGroup.transform.GetChild(i).position.x, newGroup.transform.GetChild(i).position.z);
 			sim.addAgent(pos);
 			agents.Add(newGroup.transform.GetChild(i).gameObject);
 		}
@@ -90,23 +90,24 @@ public class RVOController : MonoBehaviour
 	{
 		for (int i = 0; i < nrOfAgents; i++)
 		{
-            // Get agent position and current velocity of RVO agent
-            RVO.Vector2 pos = sim.getAgentPosition(i);
+			// Get agent position and current velocity of RVO agent
+			RVO.Vector2 pos = sim.getAgentPosition(i);
 			RVO.Vector2 velocity = sim.getAgentVelocity(i);
-            // Create temporary velocity vector
-            Vector3 temp = new Vector3(velocity.x(), 0f, velocity.y());
-            // Get current look direction of GameObject agent
+			// Create temporary velocity vector
+			Vector3 temp = new Vector3(velocity.x(), 0f, velocity.y());
+			// Get current look direction of GameObject agent
 			Vector3 lookDir = agents[i].transform.forward;
-            // If current RVO agent has no velocity
-            if (temp != new Vector3(0f, 0f, 0f))
+			// If current RVO agent has no velocity
+			if (temp != new Vector3(0f, 0f, 0f))
 				lookDir = temp;
 
-            Quaternion prefabRot = agents[i].transform.rotation;
-            var newDir = Quaternion.LookRotation(lookDir).eulerAngles;
-            agents[i].transform.rotation = Quaternion.Slerp(agents[i].transform.rotation,
-                Quaternion.Euler(newDir), Time.deltaTime * agentRootSpeed);
-            // CheckDistance(agents[i].transform.position);
-        }
+			Quaternion prefabRot = agents[i].transform.rotation;
+			var newDir = Quaternion.LookRotation(lookDir).eulerAngles;
+			agents[i].transform.rotation = Quaternion.Slerp(agents[i].transform.rotation,
+					Quaternion.Euler(newDir), Time.deltaTime * agentRootSpeed);
+			// CheckDistance(agents[i].transform.position);
+			agents[i].transform.position = new Vector3(pos.x(), 0f, pos.y());
+		}
 	}
 	/*
 void CheckDistance(Vector3 pos)
@@ -137,14 +138,14 @@ void CheckDistance(Vector3 pos)
 		for (int i = 0; i < formationGroups.Capacity; ++i)
 		{
 			GameObject currentGroup = formationGroups[i];
-//			Vector3[] startPostions = currentGroup.GetComponent<Spawner>().StartPositions;
-			
+			//			Vector3[] startPostions = currentGroup.GetComponent<Spawner>().StartPositions;
+
 			for (int j = 0; j < currentGroup.transform.childCount; j++)
 			{
 				//				RVO.Vector2 pos = new RVO.Vector2(startPostions[j].x, startPostions[j].z);
 				RVO.Vector2 pos = new RVO.Vector2(currentGroup.transform.position.x, currentGroup.transform.position.z);
 				sim.addAgent(pos);
-//				agents[agentCounter++] = currentGroup.transform.GetChild(j).gameObject;
+				//				agents[agentCounter++] = currentGroup.transform.GetChild(j).gameObject;
 				agents.Add(currentGroup.transform.GetChild(j).gameObject);
 			}
 		}
