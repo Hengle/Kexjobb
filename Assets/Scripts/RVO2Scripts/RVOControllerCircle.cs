@@ -10,6 +10,7 @@ public class RVOControllerCircle : MonoBehaviour
 
 	public GameObject agent;
 	public int nrOfAgents;
+    public float rootSpeed;
 	public float distanceToMid;
 	public float circleRadius;		//radius 150 and 100 agents looks cool
 
@@ -23,6 +24,7 @@ public class RVOControllerCircle : MonoBehaviour
 		goals = new List<RVO.Vector2>();
 		sim = Simulator.Instance;
 		agents = new GameObject[nrOfAgents];
+        rootSpeed = 5f;
 		distanceToMid = 200f;
 		SetupScenario();
 		SetPreferredVelocities();
@@ -68,8 +70,10 @@ public class RVOControllerCircle : MonoBehaviour
                 lookDir = temp;
             
 			agents[i].transform.position = new Vector3(pos.x(), 0f, pos.y());
-            agents[i].transform.rotation = Quaternion.LookRotation(lookDir);
 
+            var newDir = Quaternion.LookRotation(lookDir).eulerAngles;
+            agents[i].transform.rotation = Quaternion.Slerp(agents[i].transform.rotation,
+                Quaternion.Euler(newDir), Time.deltaTime * rootSpeed);
 
             CheckDistance(agents[i].transform.position);
 		}

@@ -6,8 +6,8 @@ using RVO;
 
 public class RVOController : MonoBehaviour
 {
-
 	public GameObject agent;
+    public float agentRootSpeed;
 
 	private RVO.Vector2[] goals;
 	private int nrOfAgents = 0;
@@ -18,6 +18,7 @@ public class RVOController : MonoBehaviour
 
 	void Start()
 	{
+        agentRootSpeed = 2f;
 		// Find number of agents
 		formationGroups = new GameObject[transform.childCount];
 		formations = new Formation[transform.childCount];
@@ -70,20 +71,23 @@ public class RVOController : MonoBehaviour
 	{
 		for (int i = 0; i < nrOfAgents; i++)
 		{
-			RVO.Vector2 pos = sim.getAgentPosition(i);
+            // Get agent position and current velocity of RVO agent
+            RVO.Vector2 pos = sim.getAgentPosition(i);
 			RVO.Vector2 velocity = sim.getAgentVelocity(i);
-			Vector3 temp = new Vector3(velocity.x(), 0f, velocity.y());
-
+            // Create temporary velocity vector
+            Vector3 temp = new Vector3(velocity.x(), 0f, velocity.y());
+            // Get current look direction of GameObject agent
 			Vector3 lookDir = agents[i].transform.forward;
-			if (temp != new Vector3(0f, 0f, 0f))
+            // If current RVO agent has no velocity
+            if (temp != new Vector3(0f, 0f, 0f))
 				lookDir = temp;
 
-			agents[i].transform.position = new Vector3(pos.x(), 0f, pos.y());
-			agents[i].transform.rotation = Quaternion.LookRotation(lookDir);
-
-
-			//	CheckDistance(agents[i].transform.position);
-		}
+            Quaternion prefabRot = agents[i].transform.rotation;
+            var newDir = Quaternion.LookRotation(lookDir).eulerAngles;
+            agents[i].transform.rotation = Quaternion.Slerp(agents[i].transform.rotation,
+                Quaternion.Euler(newDir), Time.deltaTime * agentRootSpeed);
+            // CheckDistance(agents[i].transform.position);
+        }
 	}
 	/*
 void CheckDistance(Vector3 pos)
@@ -166,5 +170,4 @@ void CheckDistance(Vector3 pos)
 
 		return true;
 	}
-
 }
