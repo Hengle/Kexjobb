@@ -75,10 +75,12 @@ public class RVOController : MonoBehaviour
 		GameObject newGroup = GetComponent<GroupSpawner>().Groups.Last();
 		for (int i = 0; i < newGroup.transform.childCount; i++)		//newGroup.transform.childCount is the number of agents added
 		{
-			goals.Add(formationGroups[transform.childCount - 1].GetComponent<Formation>().TargetPositionsRVO[i]);
+			goals.Add(formations.Last().TargetPositionsRVO[i]);
 		}
 		for(int i = 0; i < newGroup.transform.childCount; i++)
 		{
+			RVO.Vector2 pos = new RVO.Vector2(newGroup.transform.position.x, newGroup.transform.position.z);
+			sim.addAgent(pos);
 			agents.Add(newGroup.transform.GetChild(i).gameObject);
 		}
 
@@ -160,7 +162,7 @@ void CheckDistance(Vector3 pos)
  * (speed) in the direction of the goal.
  */
 		int currentGroupIndex = 0;
-		for (int i = 0; i < formationGroups.Capacity; i++)
+		for (int i = 0; i < formationGroups.Count; i++)
 		{
 			RVO.Vector2[] targetPositions = formationGroups[i].GetComponent<Formation>().TargetPositionsRVO;
 			for (int j = 0; j < targetPositions.Length; j++)
@@ -182,7 +184,7 @@ void CheckDistance(Vector3 pos)
 	bool ReachedGoal()
 	{
 		/* Check if all agents have reached their goals. */
-		for (int i = 0; i < goals.Capacity; i++)
+		for (int i = 0; i < goals.Count; i++)
 		{
 			if (RVOMath.absSq(sim.getAgentPosition(i) - goals[i]) > sim.getAgentRadius(i) * sim.getAgentRadius(i))
 			{

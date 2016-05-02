@@ -113,9 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 143f84991d6f77548b98a28184685042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 10
-  height: 10
-  spawnTime: 3
+  width: 100
+  height: 100
+  spawnTime: 5
   group2: {fileID: 109746, guid: 693a7f15e6c00944e976cc90ae69aabc, type: 2}
   group3: {fileID: 199332, guid: f6a1f4ee96db17246bf657f3c8ce1abc, type: 2}
 --- !u!4 &947067035

@@ -23,7 +23,7 @@ public abstract class Formation : MonoBehaviour
 	//	GameObject[] otherAgents; 
 
 	// Use this for initialization
-	void Start()
+	void Awake()
 	{
 		nrOfAgents = transform.childCount;
 		templatePositions = new Vector3[transform.childCount];

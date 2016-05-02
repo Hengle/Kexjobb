@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class GroupSpawner : MonoBehaviour {
 
@@ -74,15 +75,16 @@ public class GroupSpawner : MonoBehaviour {
 		switch (formation)
 		{
 			case FormationState.HorizontalRow:
-				groups[groups.Count - 1].AddComponent<HorizontalRowFormation>();
+				groups[groups.Count - 1].AddComponent<HorizontalRowFormation>().enabled = true;
 				break;
 			case FormationState.Triangle:
-				groups[groups.Count - 1].AddComponent<TriangleFormation>();
+				groups[groups.Count - 1].AddComponent<TriangleFormation>().enabled = true;
 				break;
 			case FormationState.VerticalRow:
-				groups[groups.Count - 1].AddComponent<VerticalRowFormation>();
+				groups[groups.Count - 1].AddComponent<VerticalRowFormation>().enabled = true;
 				break;
 		}
+//		groups.Last().GetComponent<Formation>().enabled = true;
 		groups[groups.Count - 1].GetComponent<Formation>().leadersTarget = startPosition + new Vector3(0f, 0f, 50f);
 		rvo.UpdateController();
 	}
