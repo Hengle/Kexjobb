@@ -18,7 +18,7 @@ public class Spawner : MonoBehaviour {
 		startPositions = new Vector3[nrOfAgents];
 		CreateStartPositions();
 		InstantiateAgents();
-		GetComponent<Formation>().leadersTarget = leadersTarget;	//Set the target for the leader
+		GetComponent<Formation>().UpdateLeadersTarget(leadersTarget);	//Set the target for the leader
 	}
 
 	// Generate starting positions for each agent

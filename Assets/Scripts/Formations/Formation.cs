@@ -5,10 +5,10 @@ using System;
 
 public abstract class Formation : MonoBehaviour
 {
-	[HideInInspector] public Vector3 leadersTarget;
+	//	[HideInInspector] public Vector3 leadersTarget;
 	[HideInInspector]
 	public int nrOfAgents;
-//	public int nrOfAgents;
+	//	public int nrOfAgents;
 	private GameObject leader;
 	private Vector3[] targetPositions;
 	private RVO.Vector2[] targetPositionsRVO;
@@ -32,9 +32,6 @@ public abstract class Formation : MonoBehaviour
 		agentTransforms = new Transform[transform.childCount];
 		CreateTemplate();
 		leader = transform.GetChild(0).gameObject;
-		//Target positions for leader, needs only to be set once
-		targetPositions[0] = leadersTarget;
-		targetPositionsRVO[0] = new RVO.Vector2(leadersTarget.x, leadersTarget.z);
 
 		float radius = leader.GetComponent<Agent>().radius;
 		float height = 2 * radius + Math.Abs(templatePositions[templatePositions.Length - 1].z);
@@ -55,6 +52,11 @@ public abstract class Formation : MonoBehaviour
 			//agentScript.TargetPoint = target;
 			//agentScript.enabled = true;
 		}
+	}
+	public void UpdateLeadersTarget(Vector3 leadersTarget)
+	{
+		targetPositions[0] = leadersTarget;
+		targetPositionsRVO[0] = new RVO.Vector2(leadersTarget.x, leadersTarget.z);
 	}
 	public Vector3[] TemplatePositions
 	{

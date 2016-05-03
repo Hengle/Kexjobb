@@ -85,7 +85,7 @@ public class GroupSpawner : MonoBehaviour {
 				break;
 		}
 //		groups.Last().GetComponent<Formation>().enabled = true;
-		groups.Last().GetComponent<Formation>().leadersTarget = startPosition + new Vector3(0f, 0f, 50f);
+		groups.Last().GetComponent<Formation>().UpdateLeadersTarget(startPosition + new Vector3(0f, 0f, 50f));
 		rvo.UpdateController();
 	}
 

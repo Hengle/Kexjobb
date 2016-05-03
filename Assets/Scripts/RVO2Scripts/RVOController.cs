@@ -167,7 +167,11 @@ void CheckDistance(Vector3 pos)
 		{
 			RVO.Vector2[] targetPositions = formationGroups[i].GetComponent<Formation>().TargetPositionsRVO;
 			for (int j = 0; j < targetPositions.Length; j++)
-				goals[currentGroupIndex++] = targetPositions[j];
+			{
+				RVO.Vector2 newGoal = new RVO.Vector2(targetPositions[j].x(), targetPositions[j].y());
+				goals[currentGroupIndex++] = newGoal;
+
+			}
 		}
 		for (int i = 0; i < sim.getNumAgents(); i++)
 		{
