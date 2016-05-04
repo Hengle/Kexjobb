@@ -42,6 +42,7 @@ public class RVOController_Test : MonoBehaviour
 
 	public void AddGroupToSim(GameObject group)
 	{
+		Agent_Test leader = group.transform.GetChild(0).gameObject.GetComponent<Agent_Test>();
 		int groupSize = group.transform.childCount;
 
 		formationGroups.Add(group); // Add group to formationGroups

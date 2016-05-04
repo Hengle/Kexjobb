@@ -4,11 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class GroupSpawner_Test : MonoBehaviour
+public class GroupSpawnerAreas : MonoBehaviour
 {
-
-	public float width; // Width of spawn area
-	public float height; // Height of spawn area
+	public GameObject spawnObject;
 	public float spawnTime = 3; // Delay between spawns
 	public GameObject group2;
 	public GameObject group3;
@@ -17,11 +15,12 @@ public class GroupSpawner_Test : MonoBehaviour
 	private System.Random random; // For easier access to random
 	private RVOController_Test rvo; // For access to RVOController Script
 	private Vector3 randomStart; // For random star position
-
+	private SpawnAreasScript spawnerAreasScript;
 	// Reference RVOController script
 	void Awake()
 	{
 		rvo = GetComponent<RVOController_Test>();
+		spawnerAreasScript = spawnObject.GetComponent<SpawnAreasScript>();
 	}
 
 	void Start()
@@ -29,19 +28,19 @@ public class GroupSpawner_Test : MonoBehaviour
 		groups = new List<GameObject>();
 		random = new System.Random();
 		InvokeRepeating("Spawn", 1, spawnTime);
+		Spawn();
 	}
 
 
 	void Spawn()
 	{
 		//Randomize start position for group
-		float minX = transform.position.x - width / 2;
-		float maxX = transform.position.x + width / 2;
-		float minZ = transform.position.z - height / 2;
-		float maxZ = transform.position.z + height / 2;
-		Vector3 startPosition = new Vector3(UnityEngine.Random.Range(minX, maxX), 0f, UnityEngine.Random.Range(minZ, maxZ));
-		randomStart = startPosition; // Use this in formation
 
+		//		Vector3 startPosition = new Vector3(UnityEngine.Random.Range(minX, maxX), 0f, UnityEngine.Random.Range(minZ, maxZ));
+		Vector3[] pos = spawnerAreasScript.GenerateRandomStartPosAndGoal();
+		Vector3 startPosition = pos[0];
+		randomStart = startPosition; // Use this in formation
+		Vector3 goalPosition = pos[1];
 		//Randomize nr of agents in group (2 or 3)
 		int nrOfAgents = UnityEngine.Random.Range(2, 4);
 
@@ -50,12 +49,13 @@ public class GroupSpawner_Test : MonoBehaviour
 		FormationState formation = (FormationState)values.GetValue(random.Next(values.Length));
 
 		//Instantiate the new agents
-		InstantiateGroup(nrOfAgents, startPosition, formation);
+		InstantiateGroup(nrOfAgents, startPosition, goalPosition, formation);
 
 	}
 
 	// Spawns a group ini the scene
-	void InstantiateGroup(int nrOfAgents, Vector3 startPosition, FormationState formation)
+	void InstantiateGroup(int nrOfAgents, Vector3 startPosition, Vector3 leadersGoal,
+		FormationState formation)
 	{
 		//Spawn group at startPosition
 		if (nrOfAgents == 2)
@@ -85,6 +85,11 @@ public class GroupSpawner_Test : MonoBehaviour
 				groups.Last().AddComponent<VerticalRowFormation_Test>().enabled = true;
 				break;
 		}
+		//Set target pos for group leader
+		GameObject leader = groups.Last().transform.GetChild(0).gameObject;
+		Agent_Test agentScript = leader.GetComponent<Agent_Test>();
+		agentScript.TargetPos = leadersGoal;
+		agentScript.TargetPosRVO = new RVO.Vector2(leadersGoal.x, leadersGoal.z);
 
 		//Update the RVOController with the new agents
 		rvo.AddGroupToSim(groups.Last());
