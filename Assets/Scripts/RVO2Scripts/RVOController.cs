@@ -21,8 +21,7 @@ public class RVOController : MonoBehaviour
 	private List<GameObject> formationGroups;
 	private List<Formation> formations;
 
-
-	void Start()
+	public void Start()
 	{
 		agentRootSpeed = 2f;
 		// Find number of agents
@@ -65,6 +64,7 @@ public class RVOController : MonoBehaviour
 			sim.doStep();
 			UpdateAgentPos();
 		}
+
 	}
 
 	public void UpdateController()
