@@ -69,10 +69,10 @@ public class RVOController : MonoBehaviour
 
 	public void UpdateController()
 	{
-		formationGroups.Add(transform.GetChild(transform.childCount - 1).gameObject);
+		GameObject newGroup = GetComponent<GroupSpawner>().Groups.Last();
+		formationGroups.Add(newGroup);
 		nrOfAgents += formationGroups[transform.childCount - 1].GetComponent<Formation>().nrOfAgents;
 		formations.Add(formationGroups[transform.childCount - 1].GetComponent<Formation>());
-		GameObject newGroup = GetComponent<GroupSpawner>().Groups.Last();
 		for (int i = 0; i < newGroup.transform.childCount; i++)   //newGroup.transform.childCount is the number of agents added
 		{
 			goals.Add(formations.Last().TargetPositionsRVO[i]);
