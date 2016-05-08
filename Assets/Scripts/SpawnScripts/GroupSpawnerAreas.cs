@@ -28,7 +28,6 @@ public class GroupSpawnerAreas : MonoBehaviour
 		groups = new List<GameObject>();
 		random = new System.Random();
 		InvokeRepeating("Spawn", 1, spawnTime);
-		Spawn();
 	}
 
 

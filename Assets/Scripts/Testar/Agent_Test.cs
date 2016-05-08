@@ -13,14 +13,7 @@ public class Agent_Test : MonoBehaviour
     [SerializeField]
     private RVO.Vector2 currentPosRVO;
 
-    void Start()
-    {
-        startPos = new Vector3();
-        targetPos = new Vector3();
-        targetPosRVO = new RVO.Vector2();
-    }
-
-	void OnDrawGizmos()
+    void OnDrawGizmos()
 	{
 		Gizmos.color = Color.blue;
 		Gizmos.DrawSphere(targetPos, 0.25f);
