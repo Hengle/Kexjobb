@@ -35,12 +35,9 @@ public class RVOController_Test : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-//		if (!ReachedGoal())
-//		{
 			SetPreferredVelocities();
 			sim.doStep();
 			UpdateAgentPos();
-//		}
 	}
 
 	public void AddGroupToSim(GameObject group)

@@ -45,7 +45,12 @@ public class GroupSpawnerAreas : MonoBehaviour
 
 		//Randomize group formation
 		Array values = Enum.GetValues(typeof(FormationState));
-		FormationState formation = (FormationState)values.GetValue(random.Next(values.Length));
+		FormationState formation;
+		do
+		{
+			formation = (FormationState)values.GetValue(random.Next(values.Length));
+
+		} while (nrOfAgents != 3 && formation == FormationState.Triangle);
 
 		//Instantiate the new agents
 		InstantiateGroup(nrOfAgents, startPosition, goalPosition, formation);
@@ -56,6 +61,8 @@ public class GroupSpawnerAreas : MonoBehaviour
 	void InstantiateGroup(int nrOfAgents, Vector3 startPosition, Vector3 leadersGoal,
 		FormationState formation)
 	{
+
+
 		//Spawn group at startPosition
 		if (nrOfAgents == 2)
 		{
@@ -89,12 +96,28 @@ public class GroupSpawnerAreas : MonoBehaviour
 		Agent_Test agentScript = leader.GetComponent<Agent_Test>();
 		agentScript.TargetPos = leadersGoal;
 		agentScript.TargetPosRVO = new RVO.Vector2(leadersGoal.x, leadersGoal.z);
-		agentScript.IsLeader = true; 
+
+		SetColorForGroup(groups.Last());
 
 		//Update the RVOController with the new agents
 		rvo.AddGroupToSim(groups.Last());
 	}
+	/// <summary>
+	/// Sets the color of the group
+	/// </summary>
+	/// <param name="group"></param>
+	void SetColorForGroup(GameObject group)
+	{
+		//Randomize color for group
+		Color groupColor = new Color(UnityEngine.Random.Range(0f, 1f),
+			UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
 
+		foreach(Transform child in group.transform)
+		{
+			child.GetChild(0).GetComponent<Renderer>().material.color = groupColor;
+		}
+
+	}
 	public List<GameObject> Groups
 	{
 		get { return groups; }
