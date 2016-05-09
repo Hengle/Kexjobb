@@ -17,6 +17,7 @@ public class RVOController_Test : MonoBehaviour
 	private List<GameObject> formationGroups;
 	private List<Formation_Test> formations;
 
+
 	void Start()
 	{
 		agentRootSpeed = 2f;
@@ -34,10 +35,12 @@ public class RVOController_Test : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
-		SetPreferredVelocities();
-		sim.doStep();
-		UpdateAgentPos();
+//		if (!ReachedGoal())
+//		{
+			SetPreferredVelocities();
+			sim.doStep();
+			UpdateAgentPos();
+//		}
 	}
 
 	public void AddGroupToSim(GameObject group)
@@ -71,6 +74,7 @@ public class RVOController_Test : MonoBehaviour
 	/* Update agent positions and direction */
 	void UpdateAgentPos()
 	{
+
 		for (int i = 0; i < totNrOfAgents; i++)
 		{
 			// Get agent position and current velocity of RVO agent
@@ -115,5 +119,15 @@ public class RVOController_Test : MonoBehaviour
 			}
 		}
 		return true;
+	}
+
+	/// <summary>
+	/// Checks if the leader has reached its goal
+	/// </summary>
+	/// <returns></returns>
+	bool LeaderReachedGoal(GameObject group)
+	{
+		GameObject leader = group.transform.GetChild(0).gameObject;
+		return (Math.Pow(((leader.GetComponent<Agent_Test>().TargetPos - leader.transform.position).magnitude), 2) < Math.Pow(sim.getAgentRadius(1), 2)) ? true : false;
 	}
 }

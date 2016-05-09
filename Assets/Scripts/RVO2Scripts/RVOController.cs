@@ -138,7 +138,6 @@ void CheckDistance(Vector3 pos)
 		for (int i = 0; i < formationGroups.Capacity; ++i)
 		{
 			GameObject currentGroup = formationGroups[i];
-			//			Vector3[] startPostions = currentGroup.GetComponent<Spawner>().StartPositions;
 
 			for (int j = 0; j < currentGroup.transform.childCount; j++)
 			{
@@ -149,12 +148,6 @@ void CheckDistance(Vector3 pos)
 				agents.Add(currentGroup.transform.GetChild(j).gameObject);
 			}
 		}
-		/*
-		for (int i = 0; i < agents.Capacity; i++)
-		{
-
-		}
-		*/
 	}
 	void SetPreferredVelocities()
 	{

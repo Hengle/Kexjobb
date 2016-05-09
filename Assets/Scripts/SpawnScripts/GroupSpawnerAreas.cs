@@ -89,6 +89,7 @@ public class GroupSpawnerAreas : MonoBehaviour
 		Agent_Test agentScript = leader.GetComponent<Agent_Test>();
 		agentScript.TargetPos = leadersGoal;
 		agentScript.TargetPosRVO = new RVO.Vector2(leadersGoal.x, leadersGoal.z);
+		agentScript.IsLeader = true; 
 
 		//Update the RVOController with the new agents
 		rvo.AddGroupToSim(groups.Last());
