@@ -7,18 +7,25 @@ public class Spawner : MonoBehaviour {
 	public GameObject agent;
 	[HideInInspector] public GameObject[] agents;
 	public Vector3 leadersTarget;
+	public bool startRVO;
 
 //	private FormationState spawnFormation;
 	private float distanceBetweenAgents = 10f;
 	private Vector3[] startPositions;
+	private RVOController rvo;
 
 	void Awake()
+	{
+		rvo = GetComponentInParent<RVOController>();
+	}
+
+	void Start()
 	{
 		agents = new GameObject[nrOfAgents];
 		startPositions = new Vector3[nrOfAgents];
 		CreateStartPositions();
 		InstantiateAgents();
-		GetComponent<Formation>().UpdateLeadersTarget(leadersTarget);	//Set the target for the leader
+		GetComponent<Formation>().UpdateLeadersTarget(leadersTarget); //Set the target for the leader
 	}
 
 	// Generate starting positions for each agent

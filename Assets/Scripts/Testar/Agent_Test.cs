@@ -10,8 +10,7 @@ public class Agent_Test : MonoBehaviour
 	private Vector3 targetPos;
 	[SerializeField]
 	private RVO.Vector2 targetPosRVO;
-	[SerializeField]
-	private RVO.Vector2 currentPosRVO;
+
 
 	void Start()
 	{
@@ -19,6 +18,7 @@ public class Agent_Test : MonoBehaviour
 		targetPos = new Vector3();
 		targetPosRVO = new RVO.Vector2();
 	}
+
 
 	void OnDrawGizmos()
 	{

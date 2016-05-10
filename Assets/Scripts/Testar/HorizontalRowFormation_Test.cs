@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HorizontalRowFormation_Test : Formation_Test
 {
-	private float distanceBetweenAgents = 10f;
+	private float distanceBetweenAgents = 7.5f;
 	protected override void CreateTemplate()
 	{
 		float xPos = 0;

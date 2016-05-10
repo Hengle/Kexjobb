@@ -4,8 +4,8 @@ using System;
 
 public class TriangleFormation_Test : Formation_Test {
 
-	private float rowDistance = 10f;    //Distance between rows of agents
-	private float columnDistance = 10f;	//Distance between agents on each row
+	private float rowDistance = 7.5f;    //Distance between rows of agents
+	private float columnDistance = 7.5f;	//Distance between agents on each row
 
 	protected override void CreateTemplate()
 	{
