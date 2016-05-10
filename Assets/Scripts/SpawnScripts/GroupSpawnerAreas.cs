@@ -97,28 +97,29 @@ public class GroupSpawnerAreas : MonoBehaviour
 		agentScript.TargetPos = leadersGoal;
 		agentScript.TargetPosRVO = new RVO.Vector2(leadersGoal.x, leadersGoal.z);
 
-		SetColorForGroup(groups.Last());
+        // Don't use this for humans! They have their own script for this.
+		//SetColorForGroup(groups.Last());
 
 		//Update the RVOController with the new agents
 		rvo.AddGroupToSim(groups.Last());
 	}
-	/// <summary>
-	/// Sets the color of the group
-	/// </summary>
-	/// <param name="group"></param>
-	void SetColorForGroup(GameObject group)
-	{
-		//Randomize color for group
-		Color groupColor = new Color(UnityEngine.Random.Range(0f, 1f),
-			UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+    /// <summary>
+    /// Sets the color of the group
+    /// </summary>
+    /// <param name="group"></param>
+    void SetColorForGroup(GameObject group)
+    {
+        //Randomize color for group
+        Color groupColor = new Color(UnityEngine.Random.Range(0f, 1f),
+            UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
 
-		foreach(Transform child in group.transform)
-		{
-			child.GetChild(0).GetComponent<Renderer>().material.color = groupColor;
-		}
+        foreach (Transform child in group.transform)
+        {
+            child.GetChild(0).GetComponent<Renderer>().material.color = groupColor;
+        }
 
-	}
-	public List<GameObject> Groups
+    }
+    public List<GameObject> Groups
 	{
 		get { return groups; }
 	}

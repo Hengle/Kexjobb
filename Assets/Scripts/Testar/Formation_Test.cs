@@ -45,7 +45,7 @@ public abstract class Formation_Test : MonoBehaviour
 		Gizmos.color = Color.green;
 		for(int i = 0; i < templatePositions.Length; i++)
 		{
-			Gizmos.DrawCube(templatePositions[i], new Vector3(5f, 5f, 5f));
+			//Gizmos.DrawCube(templatePositions[i], new Vector3(5f, 5f, 5f));
 		}
 	}
 	/// <summary>
@@ -75,7 +75,7 @@ public abstract class Formation_Test : MonoBehaviour
 	void UpdateTargetPositions()
 	{
 		// Draw line to leaders target position
-		Debug.DrawLine(transform.GetChild(0).position, transform.GetChild(0).GetComponent<Agent_Test>().TargetPos);
+		//Debug.DrawLine(transform.GetChild(0).position, transform.GetChild(0).GetComponent<Agent_Test>().TargetPos);
 		// We don't need to update leaders pos (index 0)
 		for (int i = 1; i < templatePositions.Length; i++)
 		{
@@ -87,7 +87,7 @@ public abstract class Formation_Test : MonoBehaviour
 			curAgent.TargetPosRVO = targetRVO;
 
 			// Draw line to followers target position
-			Debug.DrawLine(transform.GetChild(i).position, curAgent.TargetPos, Color.blue);
+			//Debug.DrawLine(transform.GetChild(i).position, curAgent.TargetPos, Color.blue);
 		}
 
 	}
