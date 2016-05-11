@@ -127,4 +127,9 @@ public class RVOController_Test : MonoBehaviour
 		GameObject leader = group.transform.GetChild(0).gameObject;
 		return (Math.Pow(((leader.GetComponent<Agent_Test>().TargetPos - leader.transform.position).magnitude), 2) < Math.Pow(sim.getAgentRadius(1), 2)) ? true : false;
 	}
+
+	public int NrOfAgents
+	{
+		get { return totNrOfAgents; }
+	}
 }

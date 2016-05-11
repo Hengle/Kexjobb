@@ -149,6 +149,7 @@ GameObject:
   - 4: {fileID: 947067035}
   - 114: {fileID: 947067036}
   - 114: {fileID: 947067034}
+  - 114: {fileID: 947067037}
   m_Layer: 0
   m_Name: GroupSpawner
   m_TagString: Untagged
@@ -196,6 +197,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agentRootSpeed: 2
   totNrOfAgents: 0
+--- !u!114 &947067037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 947067033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6329b2d6bd1e4c4eb598194a65cf0cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1029056743
 GameObject:
   m_ObjectHideFlags: 0
