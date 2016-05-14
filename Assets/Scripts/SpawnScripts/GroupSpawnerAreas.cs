@@ -10,14 +10,21 @@ public class GroupSpawnerAreas : MonoBehaviour
 	public float spawnTime = 3; // Delay between spawns
 	public GameObject group2;
 	public GameObject group3;
+    public GameObject trailObject;
+    public int nrOfTrailGroups2 = 3;
+    public int nrOfTrailGroups3 = 3;
 
-	private List<GameObject> groups; // List of groups that have spawned
+
+    private List<GameObject> groups; // List of groups that have spawned
 	private System.Random random; // For easier access to random
 	private RVOController_Test rvo; // For access to RVOController Script
 	private Vector3 randomStart; // For random star position
 	private SpawnAreasScript spawnerAreasScript;
-	// Reference RVOController script
-	void Awake()
+    private int nrOfTrailGroups2Count = 0;
+    private int nrOfTrailGroups3Count = 0;
+
+    // Reference RVOController script
+    void Awake()
 	{
 		rvo = GetComponent<RVOController_Test>();
 		spawnerAreasScript = spawnObject.GetComponent<SpawnAreasScript>();
@@ -68,14 +75,29 @@ public class GroupSpawnerAreas : MonoBehaviour
 		{
 			GameObject group = Instantiate(group2, startPosition, Quaternion.identity) as GameObject;
 			group.transform.parent = transform;
-			groups.Add(group);
+            // Add trails to agents in group
+            for (int i = 0; i < group.transform.childCount; i++)
+            {
+                GameObject agent = group.transform.GetChild(i).gameObject;
+                GameObject trail = Instantiate(trailObject, agent.transform.position, Quaternion.identity) as GameObject;
+                trail.transform.parent = agent.transform;
+            }
+
+            groups.Add(group);
 
 		}
 		else if (nrOfAgents == 3)
 		{
 			GameObject group = Instantiate(group3, startPosition, Quaternion.identity) as GameObject;
 			group.transform.parent = transform;
-			groups.Add(group);
+            // Add trails to agents in group
+            for (int i = 0; i < group.transform.childCount; i++)
+            {
+                GameObject agent = group.transform.GetChild(i).gameObject;
+                GameObject trail = Instantiate(trailObject, agent.transform.position, Quaternion.identity) as GameObject;
+                trail.transform.parent = agent.transform;
+            }
+            groups.Add(group);
 		}
 
 		// Add the right formation script to the group
