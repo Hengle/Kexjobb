@@ -98,7 +98,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 439118, guid: 47e6bc8489829924ea463d14d609e2aa, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: -10.8
       objectReference: {fileID: 0}
     - target: {fileID: 439118, guid: 47e6bc8489829924ea463d14d609e2aa, type: 2}
       propertyPath: m_LocalPosition.z
@@ -172,6 +172,9 @@ MonoBehaviour:
   spawnTime: 1
   group2: {fileID: 145678, guid: c7e99e1182ed5af4ab6c97d78343bd42, type: 2}
   group3: {fileID: 135280, guid: 9b8782abc352076489047371aa71883f, type: 2}
+  trailObject: {fileID: 127882, guid: 9481f2d3f85964a4db9afea04eb188ee, type: 2}
+  nrOfTrailGroups2: 3
+  nrOfTrailGroups3: 3
 --- !u!4 &947067035
 Transform:
   m_ObjectHideFlags: 0

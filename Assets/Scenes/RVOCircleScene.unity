@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 128068, guid: 049361b12da9f2d418375d55d7de343b, type: 2}
+  trailObj: {fileID: 127882, guid: 9481f2d3f85964a4db9afea04eb188ee, type: 2}
   nrOfAgents: 100
   rootSpeed: 2
   distanceToMid: 0
