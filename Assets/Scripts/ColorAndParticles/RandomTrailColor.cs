@@ -7,7 +7,7 @@ public class RandomTrailColor : MonoBehaviour {
     public bool is3DAgent = false;
 
 	// Use this for initialization
-	void Start()
+	public void SetColorOnTrails()
     {
         Color[] colors = { Color.black, Color.blue, Color.green, Color.red, Color.magenta };
         

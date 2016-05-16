@@ -11,6 +11,7 @@ public class GroupSpawnerAreas : MonoBehaviour
     public int nrOfGroupsToSpawn = 10;
 	public GameObject group2;
 	public GameObject group3;
+    public bool useTrails = false;
     public GameObject trailObject;
     public int nrOfTrailGroups2 = 3;
     public int nrOfTrailGroups3 = 3;
@@ -80,13 +81,15 @@ public class GroupSpawnerAreas : MonoBehaviour
 			GameObject group = Instantiate(group2, startPosition, Quaternion.identity) as GameObject;
 			group.transform.parent = transform;
             // Add trails to agents in group
-            for (int i = 0; i < group.transform.childCount; i++)
+            if(useTrails)
             {
-                GameObject agent = group.transform.GetChild(i).gameObject;
-                GameObject trail = Instantiate(trailObject, agent.transform.position, Quaternion.identity) as GameObject;
-                trail.transform.parent = agent.transform;
+                for (int i = 0; i < group.transform.childCount; i++)
+                {
+                    GameObject agent = group.transform.GetChild(i).gameObject;
+                    GameObject trail = Instantiate(trailObject, agent.transform.position, Quaternion.identity) as GameObject;
+                    trail.transform.parent = agent.transform;
+                }
             }
-
             groups.Add(group);
 
 		}
@@ -95,11 +98,14 @@ public class GroupSpawnerAreas : MonoBehaviour
 			GameObject group = Instantiate(group3, startPosition, Quaternion.identity) as GameObject;
 			group.transform.parent = transform;
             // Add trails to agents in group
-            for (int i = 0; i < group.transform.childCount; i++)
+            if(useTrails)
             {
-                GameObject agent = group.transform.GetChild(i).gameObject;
-                GameObject trail = Instantiate(trailObject, agent.transform.position, Quaternion.identity) as GameObject;
-                trail.transform.parent = agent.transform;
+                for (int i = 0; i < group.transform.childCount; i++)
+                {
+                    GameObject agent = group.transform.GetChild(i).gameObject;
+                    GameObject trail = Instantiate(trailObject, agent.transform.position, Quaternion.identity) as GameObject;
+                    trail.transform.parent = agent.transform;
+                }
             }
             groups.Add(group);
 		}
@@ -122,7 +128,8 @@ public class GroupSpawnerAreas : MonoBehaviour
 		Agent_Test agentScript = leader.GetComponent<Agent_Test>();
 		agentScript.TargetPos = leadersGoal;
 		agentScript.TargetPosRVO = new RVO.Vector2(leadersGoal.x, leadersGoal.z);
-        
+
+        if (useTrails) { groups.Last().GetComponent<RandomTrailColor>().SetColorOnTrails(); }
         
         // Don't use this for humans! They have their own script for this.
 		//SetColorForGroup(groups.Last());
