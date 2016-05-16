@@ -4,20 +4,23 @@ using UnityEditor;
 
 public class RandomTrailColor : MonoBehaviour {
 
+    public bool is3DAgent = false;
+
 	// Use this for initialization
-	void Start ()
+	void Start()
     {
         Color[] colors = { Color.black, Color.blue, Color.green, Color.red, Color.magenta };
         
         Color randCol = colors[(int)Mathf.Floor(Random.Range(0, colors.Length))];
 
         Color randCol2 = new Color(Random.Range(0f,1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-        Debug.Log(randCol2);
 
         for(int i = 0; i < transform.childCount; i++)
         {
             GameObject theAgent = transform.GetChild(i).gameObject;
-            GameObject trailObject = theAgent.transform.GetChild(1).gameObject;
+            int trailIndex = 1;
+            if(is3DAgent) { trailIndex = 2; }
+            GameObject trailObject = theAgent.transform.GetChild(trailIndex).gameObject;
             TrailRenderer trail = trailObject.GetComponent<TrailRenderer>();
 
             SerializedObject so = new SerializedObject(trail);

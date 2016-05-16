@@ -22,7 +22,7 @@ public class TriangleFormation : Formation
 				templatePositions[agentCounter++] = new Vector3(xPos, 0f, zPos);
 				xPos += columnDistance;
 			}
-			xPos = -((i + 1) * 5);
+			xPos = -((i + 1) * 3);
 			zPos -= rowDistance;
 		}
 	}

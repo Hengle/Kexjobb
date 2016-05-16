@@ -8,6 +8,7 @@ public class GroupSpawnerAreas : MonoBehaviour
 {
 	public GameObject spawnObject;
 	public float spawnTime = 3; // Delay between spawns
+    public int nrOfGroupsToSpawn = 10;
 	public GameObject group2;
 	public GameObject group3;
     public GameObject trailObject;
@@ -22,6 +23,7 @@ public class GroupSpawnerAreas : MonoBehaviour
 	private SpawnAreasScript spawnerAreasScript;
     private int nrOfTrailGroups2Count = 0;
     private int nrOfTrailGroups3Count = 0;
+    private int nrOfGroupsSpawned = 0;
 
     // Reference RVOController script
     void Awake()
@@ -40,8 +42,10 @@ public class GroupSpawnerAreas : MonoBehaviour
 
 	void Spawn()
 	{
-		//Randomize start position for group
+        if(nrOfGroupsSpawned == nrOfGroupsToSpawn) { return; }
+        nrOfGroupsSpawned++;
 
+		//Randomize start position for group
 		//		Vector3 startPosition = new Vector3(UnityEngine.Random.Range(minX, maxX), 0f, UnityEngine.Random.Range(minZ, maxZ));
 		Vector3[] pos = spawnerAreasScript.GenerateRandomStartPosAndGoal();
 		Vector3 startPosition = pos[0];
@@ -118,7 +122,8 @@ public class GroupSpawnerAreas : MonoBehaviour
 		Agent_Test agentScript = leader.GetComponent<Agent_Test>();
 		agentScript.TargetPos = leadersGoal;
 		agentScript.TargetPosRVO = new RVO.Vector2(leadersGoal.x, leadersGoal.z);
-
+        
+        
         // Don't use this for humans! They have their own script for this.
 		//SetColorForGroup(groups.Last());
 
