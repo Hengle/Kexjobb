@@ -118,6 +118,9 @@ MonoBehaviour:
   spawnTime: 0.5
   group2: {fileID: 109746, guid: 6d6a2fc1f0fa4ff41993866331c7324d, type: 2}
   group3: {fileID: 148918, guid: 8eeb93b805ea194438fcde2e398be549, type: 2}
+  trailObject: {fileID: 127882, guid: ef774e8819c18b941a038584eff8bab8, type: 2}
+  nrOfTrailGroups2: 3
+  nrOfTrailGroups3: 3
 --- !u!4 &947067035
 Transform:
   m_ObjectHideFlags: 0

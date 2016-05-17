@@ -5,7 +5,7 @@ using UnityEditor;
 public class RandomTrailColor : MonoBehaviour {
 
 	// Use this for initialization
-	void Start ()
+	public void InitTrail ()
     {
         Color[] colors = { Color.black, Color.blue, Color.green, Color.red, Color.magenta };
         
