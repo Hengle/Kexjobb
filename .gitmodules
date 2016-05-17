@@ -7,3 +7,10 @@
 	path = Assets/RVO2-CS
 	
 	url = https://github.com/snape/RVO2-CS.git
+
+
+[submodule "SteerLite-master"]
+	
+	path = SteerLite-master
+	
+	url = https://github.com/SteerSuite/SteerLite.git

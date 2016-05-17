@@ -8,23 +8,26 @@ public class GroupSpawnerAreas : MonoBehaviour
 {
 	public GameObject spawnObject;
 	public float spawnTime = 3; // Delay between spawns
+    public int nrOfGroupsToSpawn = 10;
 	public GameObject group2;
 	public GameObject group3;
-	public GameObject trailObject;
-	public int nrOfTrailGroups2 = 3;
-	public int nrOfTrailGroups3 = 3;
+    public bool useTrails = false;
+    public GameObject trailObject;
+    public int nrOfTrailGroups2 = 3;
+    public int nrOfTrailGroups3 = 3;
 
 
-	private List<GameObject> groups; // List of groups that have spawned
+    private List<GameObject> groups; // List of groups that have spawned
 	private System.Random random; // For easier access to random
 	private RVOController_Test rvo; // For access to RVOController Script
 	private Vector3 randomStart; // For random star position
 	private SpawnAreasScript spawnerAreasScript;
-	private int nrOfTrailGroups2Count = 0;
-	private int nrOfTrailGroups3Count = 0;
+    private int nrOfTrailGroups2Count = 0;
+    private int nrOfTrailGroups3Count = 0;
+    private int nrOfGroupsSpawned = 0;
 
-	// Reference RVOController script
-	void Awake()
+    // Reference RVOController script
+    void Awake()
 	{
 		rvo = GetComponent<RVOController_Test>();
 		spawnerAreasScript = spawnObject.GetComponent<SpawnAreasScript>();
@@ -40,8 +43,10 @@ public class GroupSpawnerAreas : MonoBehaviour
 
 	void Spawn()
 	{
-		//Randomize start position for group
+        if(nrOfGroupsSpawned == nrOfGroupsToSpawn) { return; }
+        nrOfGroupsSpawned++;
 
+		//Randomize start position for group
 		//		Vector3 startPosition = new Vector3(UnityEngine.Random.Range(minX, maxX), 0f, UnityEngine.Random.Range(minZ, maxZ));
 		Vector3[] pos = spawnerAreasScript.GenerateRandomStartPosAndGoal();
 		Vector3 startPosition = pos[0];
@@ -62,7 +67,6 @@ public class GroupSpawnerAreas : MonoBehaviour
 		//Instantiate the new agents
 		InstantiateGroup(nrOfAgents, startPosition, goalPosition, formation);
 
-
 	}
 
 	// Spawns a group ini the scene
@@ -76,29 +80,34 @@ public class GroupSpawnerAreas : MonoBehaviour
 		{
 			GameObject group = Instantiate(group2, startPosition, Quaternion.identity) as GameObject;
 			group.transform.parent = transform;
-			// Add trails to agents in group
-			for (int i = 0; i < group.transform.childCount; i++)
-			{
-				GameObject agent = group.transform.GetChild(i).gameObject;
-				GameObject trail = Instantiate(trailObject, agent.transform.position, Quaternion.identity) as GameObject;
-				trail.transform.parent = agent.transform;
-			}
-
-			groups.Add(group);
+            // Add trails to agents in group
+            if(useTrails)
+            {
+                for (int i = 0; i < group.transform.childCount; i++)
+                {
+                    GameObject agent = group.transform.GetChild(i).gameObject;
+                    GameObject trail = Instantiate(trailObject, agent.transform.position, Quaternion.identity) as GameObject;
+                    trail.transform.parent = agent.transform;
+                }
+            }
+            groups.Add(group);
 
 		}
 		else if (nrOfAgents == 3)
 		{
 			GameObject group = Instantiate(group3, startPosition, Quaternion.identity) as GameObject;
 			group.transform.parent = transform;
-			// Add trails to agents in group
-			for (int i = 0; i < group.transform.childCount; i++)
-			{
-				GameObject agent = group.transform.GetChild(i).gameObject;
-				GameObject trail = Instantiate(trailObject, agent.transform.position, Quaternion.identity) as GameObject;
-				trail.transform.parent = agent.transform;
-			}
-			groups.Add(group);
+            // Add trails to agents in group
+            if(useTrails)
+            {
+                for (int i = 0; i < group.transform.childCount; i++)
+                {
+                    GameObject agent = group.transform.GetChild(i).gameObject;
+                    GameObject trail = Instantiate(trailObject, agent.transform.position, Quaternion.identity) as GameObject;
+                    trail.transform.parent = agent.transform;
+                }
+            }
+            groups.Add(group);
 		}
 
 		// Add the right formation script to the group
@@ -120,30 +129,31 @@ public class GroupSpawnerAreas : MonoBehaviour
 		agentScript.TargetPos = leadersGoal;
 		agentScript.TargetPosRVO = new RVO.Vector2(leadersGoal.x, leadersGoal.z);
 
-		groups.Last().GetComponent<RandomTrailColor>().InitTrail();
-		// Don't use this for humans! They have their own script for this.
+        if (useTrails) { groups.Last().GetComponent<RandomTrailColor>().SetColorOnTrails(); }
+        
+        // Don't use this for humans! They have their own script for this.
 		//SetColorForGroup(groups.Last());
 
 		//Update the RVOController with the new agents
 		rvo.AddGroupToSim(groups.Last());
 	}
-	/// <summary>
-	/// Sets the color of the group
-	/// </summary>
-	/// <param name="group"></param>
-	void SetColorForGroup(GameObject group)
-	{
-		//Randomize color for group
-		Color groupColor = new Color(UnityEngine.Random.Range(0f, 1f),
-				UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
+    /// <summary>
+    /// Sets the color of the group
+    /// </summary>
+    /// <param name="group"></param>
+    void SetColorForGroup(GameObject group)
+    {
+        //Randomize color for group
+        Color groupColor = new Color(UnityEngine.Random.Range(0f, 1f),
+            UnityEngine.Random.Range(0f, 1f), UnityEngine.Random.Range(0f, 1f));
 
-		foreach (Transform child in group.transform)
-		{
-			child.GetChild(0).GetComponent<Renderer>().material.color = groupColor;
-		}
+        foreach (Transform child in group.transform)
+        {
+            child.GetChild(0).GetComponent<Renderer>().material.color = groupColor;
+        }
 
-	}
-	public List<GameObject> Groups
+    }
+    public List<GameObject> Groups
 	{
 		get { return groups; }
 	}
