@@ -9,6 +9,7 @@ public class RVOControllerCircle : MonoBehaviour
 	IList<RVO.Vector2> goals;
 
 	public GameObject agent;
+    public GameObject trailObj;
 	public int nrOfAgents;
     public float rootSpeed;
 	public float distanceToMid;
@@ -50,8 +51,11 @@ public class RVOControllerCircle : MonoBehaviour
 			RVO.Vector2 velocity = sim.getAgentPrefVelocity(i);
 			Vector3 lookDir = new Vector3(velocity.x(), 0f, velocity.y());
 
+            // Add the trail
 			agents[i] = Instantiate(agent, new Vector3(pos.x(), 0f, pos.y()), 
 				Quaternion.LookRotation(lookDir)) as GameObject;
+            GameObject trail = Instantiate(trailObj, agents[i].transform.position, Quaternion.identity) as GameObject;
+            trail.transform.parent = agents[i].transform;
 
 		}
 	}

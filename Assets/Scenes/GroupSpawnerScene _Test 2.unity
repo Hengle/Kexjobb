@@ -98,7 +98,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 439118, guid: 47e6bc8489829924ea463d14d609e2aa, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: -10.8
       objectReference: {fileID: 0}
     - target: {fileID: 439118, guid: 47e6bc8489829924ea463d14d609e2aa, type: 2}
       propertyPath: m_LocalPosition.z
@@ -126,15 +126,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 439118, guid: 47e6bc8489829924ea463d14d609e2aa, type: 2}
       propertyPath: m_LocalScale.x
-      value: 33.351723
+      value: 669.9585
       objectReference: {fileID: 0}
     - target: {fileID: 439118, guid: 47e6bc8489829924ea463d14d609e2aa, type: 2}
       propertyPath: m_LocalScale.y
-      value: 1.6675854
+      value: 33.49789
       objectReference: {fileID: 0}
     - target: {fileID: 439118, guid: 47e6bc8489829924ea463d14d609e2aa, type: 2}
       propertyPath: m_LocalScale.z
-      value: 33.351707
+      value: 669.9578
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 47e6bc8489829924ea463d14d609e2aa, type: 2}
@@ -170,8 +170,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnObject: {fileID: 1881975397}
   spawnTime: 1
+  nrOfGroupsToSpawn: 15
   group2: {fileID: 145678, guid: c7e99e1182ed5af4ab6c97d78343bd42, type: 2}
   group3: {fileID: 135280, guid: 9b8782abc352076489047371aa71883f, type: 2}
+  trailObject: {fileID: 127882, guid: ef774e8819c18b941a038584eff8bab8, type: 2}
+  nrOfTrailGroups2: 3
+  nrOfTrailGroups3: 3
 --- !u!4 &947067035
 Transform:
   m_ObjectHideFlags: 0

@@ -28,12 +28,12 @@ public class RVOController_Test : MonoBehaviour
 		formations = new List<Formation_Test>();
 
 		// Old setupScenario code
-		sim.setTimeStep(0.05f);
+		sim.setTimeStep(0.25f);
 		sim.setAgentDefaults(15.0f, 10, 10.0f, 10.0f, 2.5f, 2.0f, new RVO.Vector2(0.0f, 0.0f));
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
 	{
 			SetPreferredVelocities();
 			sim.doStep();
@@ -55,7 +55,7 @@ public class RVOController_Test : MonoBehaviour
 
 		// This has to be done when we spawn in a new agent while the simulation is running!!
 		sim.Clear(); // Default Agents has to be set after this!
-		sim.setTimeStep(0.05f);
+		sim.setTimeStep(0.25f);
 		sim.setAgentDefaults(15.0f, 10, 10.0f, 10.0f, 2.5f, 2.0f, new RVO.Vector2(0.0f, 0.0f));
 
 		// Add the individual agents to RVO Simulator
